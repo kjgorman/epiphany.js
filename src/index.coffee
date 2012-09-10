@@ -1,6 +1,7 @@
 express = require 'express'
-stylus = require 'stylus'
-assets = require 'connect-assets'
+stylus  = require 'stylus'
+assets  = require 'connect-assets'
+http    = require 'http'
 
 app = express()
 # Add Connect Assets
@@ -15,4 +16,16 @@ app.get '/', (req, resp) ->
 # Define Port
 port = process.env.PORT or process.env.VMC_APP_PORT or 3000
 # Start Server
-app.listen port, -> console.log "Listening on #{port}\nPress CTRL-C to stop server."
+srvr = http.createServer app
+io = (require 'socket.io').listen srvr
+srvr.listen port
+console.log "Listening on #{port}\nPress CTRL-C to stop server."
+
+gdata = ''
+
+io.sockets.on 'connection', (socket) ->
+    socket.emit 'edit', gdata
+    socket.on 'edit', (data) ->
+        socket.broadcast.emit 'edit', gdata = data
+        return
+    return 
