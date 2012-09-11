@@ -29,3 +29,6 @@ io.sockets.on 'connection', (socket) ->
         socket.broadcast.emit 'edit', gdata = data
         return
     return 
+io.configure() ->
+    io.set "transports", ["xhr-polling"] 
+    io.set "polling duration", 10
