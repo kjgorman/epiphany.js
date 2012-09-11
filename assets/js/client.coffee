@@ -4,7 +4,7 @@ socket.on 'edit', (data) ->
     $("#scratch").val data['text']
 
 socket.on 'connect', (data) ->
-    $("#connecting").animate {color:'#000000'}
+    $("#connecting").animate {color:'#FFFFFF'}
 
 
 $('#scratch').keyup ->
