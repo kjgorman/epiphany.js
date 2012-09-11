@@ -11,7 +11,7 @@ $('#scratch').keyup ->
     socket.emit 'edit', {text:$(this).val()}
 
 output = (txt) ->
-    $("#console").val $("#console").val()+txt+"\n>>"
+    $("#console").val $("#console").val()+txt+"\n>> " 
 
 $("#submit").click (event) ->
     data = $("#scratch").val()
