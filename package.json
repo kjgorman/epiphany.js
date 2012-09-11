@@ -10,6 +10,8 @@
     , "nib": "0.4.1"
     , "markdown": "0.3.1"
     , "which": "*"
+    , "express":"*"
+    , "socket.io":"*"
   }, "scripts": {
     "start": "node server.js",
     "test": "mocha --require should --compilers coffee:coffee-script --colors"
