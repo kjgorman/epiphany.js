@@ -3,7 +3,7 @@ socket = io.connect 'http://desolate-scrubland-9651.herokuapp.com/'
 socket.on 'edit', (data) ->
     $("#scratch").val data['text']
 
-socket.on 'connect' (data) ->
+socket.on 'connect', (data) ->
     $("#connecting").animate {color:'#000000'}
 
 
