@@ -3,6 +3,7 @@ socket = io.connect 'http://desolate-scrubland-9651.herokuapp.com/',  {'sync dis
 
 socket.on 'edit', (data) ->
     $("#scratch").val data['text']
+    console.log data
     $("#online").text "Users connected: "+data.clients
 
 socket.on 'connect', (data) ->
