@@ -30,12 +30,12 @@ io.sockets.manager.settings.blacklist = []
 
 io.sockets.on 'connection', (socket) ->
     gdata.clients = io.sockets.clients().length
-    socket.broadcast.emit 'edit', gdata
+    socket.on 'connect', (data) ->
+        socket.broadcast.emit 'edit', gdata
     socket.on 'edit', (data) ->
         gdata.text = data.text
         socket.broadcast.emit 'edit', gdata
-        return
-    return 
+        return 
     socket.on 'disconnect', () ->
         gdata.clients = io.sockets.clients().length
 
