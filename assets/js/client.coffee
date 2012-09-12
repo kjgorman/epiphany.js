@@ -7,7 +7,7 @@ socket.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 2500
 
 
-$("#scratch").keydown -> 
+$("#scratch").keydown (e) -> 
     if e.keyCode == 9
         start: this.selectionStart;
         end: this.selectionEnd;
