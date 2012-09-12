@@ -6,6 +6,7 @@ socket.on 'edit', (data) ->
 socket.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 2500
     $("#scratch").attr('readonly', false)
+    $("#client_count").val "Clients: "+data['users']
 
 
 $("#scratch").keydown (e) -> 
