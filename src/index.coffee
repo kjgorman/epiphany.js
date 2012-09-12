@@ -26,7 +26,7 @@ gdata = ''
 io.sockets.on 'connection', (socket) ->
     socket.emit 'edit', gdata
     socket.on 'edit', (data) ->
-        socket.broadcast.emit 'edit', (gdata: data, users:io.sockets.clients().length)
+        socket.broadcast.emit 'edit', gdata
         return
     return 
 io.configure() ->
