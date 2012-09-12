@@ -1,5 +1,5 @@
-socket = io.connect 'http://desolate-scrubland-9651.herokuapp.com/'
-#socket = io.connect 'http://localhost'
+#socket = io.connect 'http://desolate-scrubland-9651.herokuapp.com/'
+socket = io.connect 'http://localhost', {'sync disconnect on unload' : true}
 
 socket.on 'edit', (data) ->
     $("#scratch").val data['text']
@@ -9,6 +9,8 @@ socket.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
         $(this).remove()
     $("#scratch").attr('readonly', false)
+socket.on 'disconnect', (data) ->
+    socket.disconnect()
 
 
 $("#scratch").keydown (e) -> 

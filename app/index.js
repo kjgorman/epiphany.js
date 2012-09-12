@@ -43,20 +43,23 @@ gdata = {
   clients: 0
 };
 
+io.sockets.manager.settings.blacklist = [];
+
 io.sockets.on('connection', function(socket) {
-  gdata.clients += 1;
-  socket.emit('edit', gdata);
+  gdata.clients = io.sockets.clients().length;
+  socket.broadcast.emit('edit', gdata);
   socket.on('edit', function(data) {
     gdata.text = data.text;
     socket.broadcast.emit('edit', gdata);
   });
   return;
   return socket.on('disconnect', function() {
-    return gdata.clients -= 1;
+    return gdata.clients = io.sockets.clients().length;
   });
 });
 
 io.configure(function() {
   io.set("transports", ["xhr-polling"]);
-  return io.set("polling duration", 10);
+  io.set("polling duration", 10);
+  return io.set("sync disconnect on unload", true);
 });
