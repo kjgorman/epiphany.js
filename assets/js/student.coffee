@@ -1,15 +1,14 @@
-socket = io.connect '/', {'sync disconnect on unload' : true}
+student = io.connect '/student', {'sync disconnect on unload' : true}
 
-socket.on 'edit', (data) ->
+student.on 'edit', (data) ->
     $("#scratch").val data['text']
-socket.on 'online', (data) ->
+student.on 'online', (data) ->
     $("#online").text "Users connected: "+data.clients
 
-socket.on 'connect', (data) ->
+student.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
         $(this).remove()
     $("#scratch").attr('readonly', false)
-
 
 $("#scratch").keydown (e) -> 
     if e.keyCode == 9
@@ -23,7 +22,7 @@ $("#scratch").keydown (e) ->
         false
 
 $('#scratch').keyup ->
-    socket.emit 'edit', {text:$(this).val()}
+    student.emit 'edit', {text:$(this).val()}
 
 output = (txt) ->
     $("#console").val $("#console").val()+txt+"\n>> " 

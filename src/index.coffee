@@ -25,21 +25,31 @@ io = (require 'socket.io').listen srvr
 srvr.listen port
 console.log "Listening on #{port}\nPress CTRL-C to stop server."
 
+studentsOnline = () ->
+    return io.of('/student').clients().length
+
 gdata = {clients:0}
 io.sockets.manager.settings.blacklist = []
 
-io.sockets.on 'connection', (socket) ->
+io.of('/student')
+  .on 'connection', (socket) ->
+
     gdata.clients = io.sockets.clients().length
-    socket.emit 'online', {clients:io.sockets.clients().length}
-    socket.broadcast.emit 'online', {clients:io.sockets.clients().length}
+    socket.emit 'online', {clients:studentsOnline()}
+    socket.broadcast.emit 'online', {clients:studentsOnline()}
+
     socket.on 'edit', (data) ->
         gdata.text = data.text
         socket.broadcast.emit 'edit', gdata
-        socket.emit 'online', {clients:io.sockets.clients().length}
+        socket.emit 'online', {clients:studentsOnline()}
         return 
     socket.on 'disconnect', () ->
-        gdata.clients = io.sockets.clients().length
-        socket.broadcast.emit 'online', {clients:io.sockets.clients().length}
+        gdata.clients = studentsOnline()
+        socket.broadcast.emit 'online', {clients:studentsOnline()}
+
+io.of('/teacher')
+  .on 'connection', (socket) ->
+    #should probably do something sometime soon        
 
 #unfortunately heroku doesn't support cool websockets : (
 io.configure ->
