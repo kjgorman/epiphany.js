@@ -1,5 +1,5 @@
-#socket = io.connect 'http://desolate-scrubland-9651.herokuapp.com/'
-socket = io.connect 'http://localhost', {'sync disconnect on unload' : true}
+socket = io.connect 'http://desolate-scrubland-9651.herokuapp.com/',  {'sync disconnect on unload' : true}
+#socket = io.connect 'http://localhost', {'sync disconnect on unload' : true}
 
 socket.on 'edit', (data) ->
     $("#scratch").val data['text']
