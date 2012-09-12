@@ -29,6 +29,10 @@ output = (txt) ->
 $("#submit").click (event) ->
     data = $("#scratch").val()
     eval data
-$("#nerd").click (event) ->
+$("#nerd").toggle ((event) ->
     $("#scratch").css({"color":"#0F0", "background-color":"#000", "font":"console"})
-    $("#console").css({"color":"#0F0", "background-color":"#000", "font":"console"})
+    $("#console").css({"color":"#0F0", "background-color":"#000", "font":"console"})),
+    ((event) ->
+    $("#scratch").css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
+    $("#console").css({"color":"#000", "background-color":"#fff", "font":"helvetica"}))
+    
