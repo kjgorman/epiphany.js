@@ -7,6 +7,17 @@ socket.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 2500
 
 
+$("#scratch").keydown -> 
+    if e.keyCode == 9
+        start: this.selectionStart;
+        end: this.selectionEnd;
+        $this: $(this)
+        value: $this.val()
+        $this.val (value.substring 0, start)+"\t"+(value.substring end)
+        this.selectionStart = this.selectionEnd = start + 1
+        e.preventDefault()
+        false
+
 $('#scratch').keyup ->
     socket.emit 'edit', {text:$(this).val()}
 
