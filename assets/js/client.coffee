@@ -9,10 +9,10 @@ socket.on 'connect', (data) ->
 
 $("#scratch").keydown (e) -> 
     if e.keyCode == 9
-        start: this.selectionStart
-        end: this.selectionEnd
-        $this: $(this)
-        value: $this.val()
+        start = this.selectionStart
+        end = this.selectionEnd
+        $this = $(this)
+        value = $this.val()
         $this.val (value.substring 0, start)+"\t"+(value.substring end)
         this.selectionStart = this.selectionEnd = start + 1
         e.preventDefault()
