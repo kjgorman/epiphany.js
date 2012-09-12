@@ -1,16 +1,14 @@
-socket = io.connect 'http://desolate-scrubland-9651.herokuapp.com/',  {'sync disconnect on unload' : true}
-#socket = io.connect 'http://localhost', {'sync disconnect on unload' : true}
+socket = io.connect '/', {'sync disconnect on unload' : true}
 
 socket.on 'edit', (data) ->
     $("#scratch").val data['text']
+socket.on 'online', (data) ->
     $("#online").text "Users connected: "+data.clients
 
 socket.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
         $(this).remove()
     $("#scratch").attr('readonly', false)
-socket.on 'disconnect', (data) ->
-    socket.disconnect()
 
 
 $("#scratch").keydown (e) -> 

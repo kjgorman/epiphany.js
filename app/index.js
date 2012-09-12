@@ -47,14 +47,24 @@ io.sockets.manager.settings.blacklist = [];
 
 io.sockets.on('connection', function(socket) {
   gdata.clients = io.sockets.clients().length;
-  socket.broadcast.emit('edit', gdata);
+  socket.emit('online', {
+    clients: io.sockets.clients().length
+  });
+  socket.broadcast.emit('online', {
+    clients: io.sockets.clients().length
+  });
   socket.on('edit', function(data) {
     gdata.text = data.text;
     socket.broadcast.emit('edit', gdata);
+    socket.emit('online', {
+      clients: io.sockets.clients().length
+    });
   });
-  return;
   return socket.on('disconnect', function() {
-    return gdata.clients = io.sockets.clients().length;
+    gdata.clients = io.sockets.clients().length;
+    return socket.broadcast.emit('online', {
+      clients: io.sockets.clients().length
+    });
   });
 });
 

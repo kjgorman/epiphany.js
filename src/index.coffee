@@ -30,14 +30,16 @@ io.sockets.manager.settings.blacklist = []
 
 io.sockets.on 'connection', (socket) ->
     gdata.clients = io.sockets.clients().length
-    socket.on 'connect', (data) ->
-        socket.broadcast.emit 'edit', gdata
+    socket.emit 'online', {clients:io.sockets.clients().length}
+    socket.broadcast.emit 'online', {clients:io.sockets.clients().length}
     socket.on 'edit', (data) ->
         gdata.text = data.text
         socket.broadcast.emit 'edit', gdata
+        socket.emit 'online', {clients:io.sockets.clients().length}
         return 
     socket.on 'disconnect', () ->
         gdata.clients = io.sockets.clients().length
+        socket.broadcast.emit 'online', {clients:io.sockets.clients().length}
 
 #unfortunately heroku doesn't support cool websockets : (
 io.configure ->
