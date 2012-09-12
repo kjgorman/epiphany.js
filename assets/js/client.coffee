@@ -5,6 +5,7 @@ socket.on 'edit', (data) ->
 
 socket.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 2500
+    $("#scratch").attr('readonly', false)
 
 
 $("#scratch").keydown (e) -> 
