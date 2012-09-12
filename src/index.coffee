@@ -13,6 +13,10 @@ app.set 'view engine', 'jade'
 # Get root_path return index view
 app.get '/', (req, resp) -> 
   resp.render 'index'
+app.get '/student', (req,resp) ->
+  resp.render 'student'
+app.get '/teacher', (req, resp) ->
+  resp.render 'teacher'
 # Define Port
 port = process.env.PORT or process.env.VMC_APP_PORT or 3000
 # Start Server
@@ -21,14 +25,20 @@ io = (require 'socket.io').listen srvr
 srvr.listen port
 console.log "Listening on #{port}\nPress CTRL-C to stop server."
 
-gdata = ''
+gdata = {clients:0}
 
 io.sockets.on 'connection', (socket) ->
+    gdata.clients += 1
     socket.emit 'edit', gdata
     socket.on 'edit', (data) ->
+        gdata.text = data.text
         socket.broadcast.emit 'edit', gdata
         return
     return 
-io.configure() ->
+    socket.on 'disconnect', () ->
+        gdata.clients -= 1
+
+#unfortunately heroku doesn't support cool websockets : (
+io.configure ->
     io.set "transports", ["xhr-polling"] 
     io.set "polling duration", 10

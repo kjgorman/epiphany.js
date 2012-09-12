@@ -1,12 +1,14 @@
-socket = io.connect 'http://desolate-scrubland-9651.herokuapp.com/'
+#socket = io.connect 'http://desolate-scrubland-9651.herokuapp.com/'
+socket = io.connect 'http://localhost'
 
 socket.on 'edit', (data) ->
     $("#scratch").val data['text']
+    $("#online").text "Users connected: "+data.clients
 
 socket.on 'connect', (data) ->
-    $("#connecting").animate {color:'#FFFFFF'}, 2500
+    $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
+        $(this).remove()
     $("#scratch").attr('readonly', false)
-
 
 
 $("#scratch").keydown (e) -> 
@@ -32,7 +34,9 @@ $("#submit").click (event) ->
 $("#nerd").toggle (event) ->
     $("#scratch").css({"color":"#0F0", "background-color":"#000", "font":"console"})
     $("#console").css({"color":"#0F0", "background-color":"#000", "font":"console"})
+    $(this).text("normal mode")
 , (event) ->
     $("#scratch").css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
     $("#console").css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
+    $(this).text("nerd mode")
     

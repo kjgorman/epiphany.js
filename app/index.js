@@ -21,6 +21,14 @@ app.get('/', function(req, resp) {
   return resp.render('index');
 });
 
+app.get('/student', function(req, resp) {
+  return resp.render('student');
+});
+
+app.get('/teacher', function(req, resp) {
+  return resp.render('teacher');
+});
+
 port = process.env.PORT || process.env.VMC_APP_PORT || 3000;
 
 srvr = http.createServer(app);
@@ -31,11 +39,24 @@ srvr.listen(port);
 
 console.log("Listening on " + port + "\nPress CTRL-C to stop server.");
 
-gdata = '';
+gdata = {
+  clients: 0
+};
 
 io.sockets.on('connection', function(socket) {
+  gdata.clients += 1;
   socket.emit('edit', gdata);
   socket.on('edit', function(data) {
-    socket.broadcast.emit('edit', gdata = data);
+    gdata.text = data.text;
+    socket.broadcast.emit('edit', gdata);
   });
+  return;
+  return socket.on('disconnect', function() {
+    return gdata.clients -= 1;
+  });
+});
+
+io.configure(function() {
+  io.set("transports", ["xhr-polling"]);
+  return io.set("polling duration", 10);
 });
