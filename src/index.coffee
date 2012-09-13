@@ -36,7 +36,7 @@ idNickPairForClient = (client) ->
 onlineData = () ->
     sClients = studentsOnline()
     nickPairs = []
-    nicPairs.push idNickPairForClient client for client in sClients 
+    nickPairs.push idNickPairForClient client for client in sClients 
     return {clients:sClients.length, idNickPairs:nickPairs}
 
 gdata = {clients:0}
