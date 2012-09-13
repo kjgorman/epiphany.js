@@ -9,6 +9,7 @@ student.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
         $(this).remove()
     $("#scratch").attr('readonly', false)
+    socket.emit 'set name', 'test user'
 
 $("#scratch").keydown (e) -> 
     if e.keyCode == 9

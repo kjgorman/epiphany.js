@@ -2,6 +2,7 @@ express = require 'express'
 stylus  = require 'stylus'
 assets  = require 'connect-assets'
 http    = require 'http'
+_       = require '_'
 
 app = express()
 # Add Connect Assets
@@ -26,9 +27,10 @@ srvr.listen port
 console.log "Listening on #{port}\nPress CTRL-C to stop server."
 
 studentsOnline = () ->
-    return io.of('/student').clients().length
+    return io.of('/student').clients()
 onlineData = () ->
-    return {clients:studentsOnline()}
+    var sClients = studentsOnline()
+    return {clients:sClients.length, idNickPairs:_.map sClients, (client) -> {id:client.id,nick:client.get 'nick', (err, nick) -> nick}}
 
 gdata = {clients:0}
 io.sockets.manager.settings.blacklist = []
@@ -36,10 +38,13 @@ io.sockets.manager.settings.blacklist = []
 io.of('/student')
   .on 'connection', (socket) ->
 
-    gdata.clients = io.sockets.clients().length
+    gdata.clients = onlineData().clients
     socket.emit 'online', onlineData()
     socket.broadcast.emit 'online', onlineData()
     io.of('/teacher').emit 'online', onlineData()
+    socket.set 'id', studentsOnline().length+1
+    socket.on 'set name', (name) ->
+        socket.set 'nick', name
     socket.on 'edit', (data) ->
         gdata.text = data.text
         socket.broadcast.emit 'edit', gdata
