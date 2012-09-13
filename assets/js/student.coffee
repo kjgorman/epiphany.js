@@ -9,7 +9,7 @@ student.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
         $(this).remove()
     $("#scratch").attr('readonly', false)
-    socket.emit 'set name', 'test user'
+    student.emit 'set name', 'test user'
 
 $("#scratch").keydown (e) -> 
     if e.keyCode == 9
@@ -23,7 +23,7 @@ $("#scratch").keydown (e) ->
         false
 
 $('#scratch').keyup ->
-    student.emit 'edit', {text:$(this).val()}
+    student.emit 'edit', {text:$(this).val().replace('\$','\\$')}
 
 output = (txt) ->
     $("#console").val $("#console").val()+txt+"\n>> " 
