@@ -23,10 +23,10 @@ $("#scratch").keydown (e) ->
         false
 
 dollarCharacterConsideredHarmful = () ->
-        $("#scratch").append $("<div class='alert alert-error hide'>"+
+        $("#scratch").append $("<div class='alert alert-error'>"+
                                 "Sorry, but for security reasons the dollar character is not allowed"+
                                 "</div>")
-                      .show 'blind', 1000
+        $('.alert-error').show 'blind', 1000
         return
 
 $('#scratch').keyup ->
