@@ -30,8 +30,12 @@ studentsOnline = () ->
     return io.of('/student').clients()
 onlineData = () ->
     sClients = studentsOnline()
-    nickPairs = _.map sClients, (client) -> {id:client.id,nick:client.get 'nick', (err, nick) -> nick}
-    console.log 'NICK PAIRS: '+nickPairs
+    nickPairs = []
+    for client in sClients
+        pair = {}
+        pair.id = client.id
+        pair.nick = client.get 'nick', (err, name) -> name || err
+        nickPairs.push pair
     return {clients:sClients.length, idNickPairs:nickPairs}
 
 gdata = {clients:0}
