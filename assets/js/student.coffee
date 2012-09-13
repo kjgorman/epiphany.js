@@ -23,15 +23,18 @@ $("#scratch").keydown (e) ->
         false
 
 dollarCharacterConsideredHarmful = () ->
+        console.log 'hm'
         ($("#scratch").append $("<div class='alert alert-error hide'>"+
                                 "Sorry, but for security reasons the dollar character is not allowed"+
                                 "</div>"))
                       .animate 'blind', 1000
+        return
 
 $('#scratch').keyup ->
     disallowDollar = /\$/
     console.log disallowDollar.test $(this).val()
     if disallowDollar.test $(this).val()
+        console.log 'weirdness'
         dollarCharacterConsideredHarmful()
         return
     if !~($(".alert-error").length-1)
