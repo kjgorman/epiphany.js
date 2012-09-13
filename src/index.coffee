@@ -32,9 +32,11 @@ onlineData = () ->
     sClients = studentsOnline()
     nickPairs = []
     for client in sClients
+        console.log client
         pair = {}
         pair.id = client.id
         pair.nick = client.get 'nick', (err, name) -> name || err
+        console.log pair
         nickPairs.push pair
     return {clients:sClients.length, idNickPairs:nickPairs}
 
