@@ -30,6 +30,7 @@ dollarCharacterConsideredHarmful = () ->
 
 $('#scratch').keyup ->
     disallowDollar = /\$/
+    console.log disallowDollar.test $(this).val()
     if disallowDollar.test $(this).val()
         dollarCharacterConsideredHarmful()
         return
