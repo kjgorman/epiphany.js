@@ -22,8 +22,20 @@ $("#scratch").keydown (e) ->
         e.preventDefault()
         false
 
+dollarCharacterConsideredHarmful = () ->
+        ($("#scratch").append $("<div class='alert alert-error hide'>"+
+                                "Sorry, but for security reasons the dollar character is not allowed"+
+                                "</div>"))
+                      .animate 'blind', 1000
+
 $('#scratch').keyup ->
-    student.emit 'edit', {text:$(this).val().replace('\$','\\$')}
+    disallowDollar = /\$/
+    if disallowDollar.test $(this).val()
+        dollarCharacterConsideredHarmful()
+        return
+    if !~($(".alert-error").length-1)
+        $(".alert-error").hide 'explode', 1000
+    student.emit 'edit', {text:$(this).val()}
 
 output = (txt) ->
     $("#console").val $("#console").val()+txt+"\n>> " 
