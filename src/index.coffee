@@ -29,7 +29,7 @@ console.log "Listening on #{port}\nPress CTRL-C to stop server."
 studentsOnline = () ->
     return io.of('/student').clients()
 onlineData = () ->
-    var sClients = studentsOnline()
+    sClients = studentsOnline()
     return {clients:sClients.length, idNickPairs:_.map sClients, (client) -> {id:client.id,nick:client.get 'nick', (err, nick) -> nick}}
 
 gdata = {clients:0}
