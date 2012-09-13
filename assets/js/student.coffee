@@ -35,7 +35,8 @@ $('#scratch').keyup ->
           dollarCharacterConsideredHarmful()
           return
       student.emit 'edit', {text:$(this).val()}
-    $(".alert-error").hide 'explode', 1000
+    else
+      $(".alert-error").hide 'explode', 1000, () -> $(this).remove()
       
 
 output = (txt) ->
