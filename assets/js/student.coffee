@@ -23,19 +23,19 @@ $("#scratch").keydown (e) ->
         false
 
 dollarCharacterConsideredHarmful = () ->
-        $("#scratch").parent().append $("<div class='alert alert-error'>"+
+        $("#scratch").parent().append $("<div id='jqprotect' class='alert alert-error'>"+
                                 "Sorry, but for security reasons the dollar character is not allowed"+
                                 "</div>")
         return
 
 $('#scratch').keyup ->
-    disallowDollar = /\$/
-    if disallowDollar.test $(this).val()
-        dollarCharacterConsideredHarmful()
-        return
-    if !~($(".alert-error").length-1)
-        $(".alert-error").hide 'explode', 1000
-    student.emit 'edit', {text:$(this).val()}
+    if $("#jqprotect").length > 0
+      disallowDollar = /\$/
+      if disallowDollar.test $(this).val()
+          dollarCharacterConsideredHarmful()
+          return
+      $(".alert-error").hide 'explode', 1000
+      student.emit 'edit', {text:$(this).val()}
 
 output = (txt) ->
     $("#console").val $("#console").val()+txt+"\n>> " 
