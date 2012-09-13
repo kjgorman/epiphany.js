@@ -28,16 +28,15 @@ console.log "Listening on #{port}\nPress CTRL-C to stop server."
 
 studentsOnline = () ->
     return io.of('/student').clients()
-onlineData = () ->
-    sClients = studentsOnline()
-    nickPairs = []
-    for client in sClients
-        console.log client
+idNickPairForClient = (client) ->
         pair = {}
         pair.id = client.id
         pair.nick = client.get 'nick', (err, name) -> name || err
-        console.log pair
-        nickPairs.push pair
+        return pair
+onlineData = () ->
+    sClients = studentsOnline()
+    nickPairs = []
+    nicPairs.push idNickPairForClient client for client in sClients 
     return {clients:sClients.length, idNickPairs:nickPairs}
 
 gdata = {clients:0}
