@@ -2,7 +2,6 @@ express = require 'express'
 stylus  = require 'stylus'
 assets  = require 'connect-assets'
 http    = require 'http'
-_       = require '_'
 
 app = express()
 # Add Connect Assets
@@ -28,15 +27,18 @@ console.log "Listening on #{port}\nPress CTRL-C to stop server."
 
 studentsOnline = () ->
     return io.of('/student').clients()
+
 idNickPairForClient = (client) ->
         pair = {}
         pair.id = client.id
-        pair.nick = client.get 'nick', (err, name) -> name || err
+        pair.nick = client.store.data.nick
         return pair
+
 onlineData = () ->
     sClients = studentsOnline()
     nickPairs = []
-    nickPairs.push idNickPairForClient client for client in sClients 
+    nickPairs.push (idNickPairForClient client) for client in sClients 
+    console.log nickPairs
     return {clients:sClients.length, idNickPairs:nickPairs}
 
 gdata = {clients:0}
@@ -45,13 +47,18 @@ io.sockets.manager.settings.blacklist = []
 io.of('/student')
   .on 'connection', (socket) ->
 
-    gdata.clients = onlineData().clients
-    socket.emit 'online', onlineData()
-    socket.broadcast.emit 'online', onlineData()
-    io.of('/teacher').emit 'online', onlineData()
+    online_data = onlineData() #don't need to recompute this for the next few emissions
+    gdata.clients = online_data.clients
+    socket.emit 'online', online_data
+    socket.broadcast.emit 'online', online_data
+    io.of('/teacher').emit 'render', online_data
+
     socket.set 'id', studentsOnline().length+1
+
     socket.on 'set name', (name) ->
         socket.set 'nick', name
+        io.of('/teacher').emit 'render', onlineData()
+
     socket.on 'edit', (data) ->
         gdata.text = data.text
         socket.broadcast.emit 'edit', gdata
@@ -59,12 +66,11 @@ io.of('/student')
         return 
     socket.on 'disconnect', () ->
         gdata.clients = studentsOnline()
-        socket.broadcast.emit 'online', onlineData()
+        io.of('/student').emit 'edit', onlineData()
+        io.of('/teacher').emit 'render', onlineData()
 
 io.of('/teacher')
   .on 'connection', (socket) ->
-    #should probably do something sometime soon    
-    socket.emit 'online', onlineData()
     socket.emit 'render', onlineData()    
 
 #unfortunately heroku doesn't support cool websockets : (

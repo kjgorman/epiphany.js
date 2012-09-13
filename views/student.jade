@@ -10,13 +10,13 @@ block content
     div.row
         div.span12
             textarea(rows='10', readonly='readonly')#scratch.span12
+        .btn.btn-success#submit.span1
+            | submit
         h4.span12 
             | use output("some text") to write into the console
         div.span12
             textarea(rows='10', readonly='readonly')#console.span12
                 | >> 
-        .btn.btn-success#submit.span1
-            | submit
         .btn.btn-info#nerd.span2
             | nerd mode
 block pagejs

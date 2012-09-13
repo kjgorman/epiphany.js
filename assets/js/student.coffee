@@ -43,6 +43,8 @@ $('#scratch').keyup ->
 
 output = (txt) ->
     $("#console").val $("#console").val()+txt+"\n>> " 
+    cnsl = $("#console")
+    cnsl.scrollTop(cnsl[0].scrollHeight) #weird the jquery doesn't have scrollheight()
 
 $("#submit").click (event) ->
     data = $("#scratch").val()
