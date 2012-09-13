@@ -29,14 +29,16 @@ dollarCharacterConsideredHarmful = () ->
         return
 
 $('#scratch').keyup ->
+    disallowDollar = /\$/       
+    hasDollar = disallowDollar.test $(this).val()
     if $("#jqprotect").length == 0
-      disallowDollar = /\$/
-      if disallowDollar.test $(this).val()
+      if hasDollar
           dollarCharacterConsideredHarmful()
           return
       student.emit 'edit', {text:$(this).val()}
     else
-      $(".alert-error").hide 'explode', 1000, () -> $(this).remove()
+      if !hasDollar
+          $(".alert-error").hide 'explode', 1000, () -> $(this).remove()
       
 
 output = (txt) ->
