@@ -7,7 +7,7 @@ teacher.on 'online', (data) ->
     $("#online").text "Students online: "+data.clients
 teacher.on 'render', (data) ->
     console.log data
-    id = data.idNickPairs.id
-    nick = data.idNickPairs.nick
     for idx in [0...data.clients]
+        id = data.idNickPairs[idx].id
+        nick = data.idNickPairs[idx].nick
         $(".container").append("<div class='row'><div class='span12'>A student is connected; id=#{id},nick=#{nick}</div></div>")

@@ -30,7 +30,9 @@ studentsOnline = () ->
     return io.of('/student').clients()
 onlineData = () ->
     sClients = studentsOnline()
-    return {clients:sClients.length, idNickPairs:_.map sClients, (client) -> {id:client.id,nick:client.get 'nick', (err, nick) -> nick}}
+    nickPairs = _.map sClients, (client) -> {id:client.id,nick:client.get 'nick', (err, nick) -> nick}
+    console.log 'NICK PAIRS: '+nickPairs
+    return {clients:sClients.length, idNickPairs:nickPairs}
 
 gdata = {clients:0}
 io.sockets.manager.settings.blacklist = []
