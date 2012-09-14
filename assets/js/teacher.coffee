@@ -19,7 +19,7 @@ teacher.on 'render', (data) ->
           (el) ->
             pair_present = _.map data.idNickPairs, (p) ->
                              id_rgx = new RegExp p.id, 'g'
-                             nm_rgx = new RegExp p.nick 'g'
+                             nm_rgx = new RegExp p.nick, 'g'
                              (id_rgx.test $(el).text()) and (nm_rgx.test $(el).text())
             if !_.any pair_present
                 $(el).parent().remove()

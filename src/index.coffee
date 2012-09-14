@@ -2,6 +2,7 @@ express = require 'express'
 stylus  = require 'stylus'
 assets  = require 'connect-assets'
 http    = require 'http'
+_       = require 'underscore'
 
 app = express()
 # Add Connect Assets
@@ -64,10 +65,14 @@ io.of('/student')
         socket.broadcast.emit 'edit', gdata
         socket.emit 'online', onlineData()
         return 
-    socket.on 'disconnect', () ->
-        gdata.clients = studentsOnline()
-        io.of('/student').emit 'edit', onlineData()
-        io.of('/teacher').emit 'render', onlineData()
+
+    socket.on 'disconnect', (data) ->
+        online = onlineData()
+        nickPairsLessThis = _.filter online.idNickPairs, (o) -> o.id != socket.id
+        onlineLessThis = {clients:online.clients-1, idNickPairs:nickPairsLessThis}
+        gdata.clients = online.clients
+        io.of('/student').emit 'online',  onlineLessThis
+        io.of('/teacher').emit 'render', onlineLessThis
 
 io.of('/teacher')
   .on 'connection', (socket) ->
