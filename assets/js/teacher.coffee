@@ -5,21 +5,28 @@ teacher.on 'connect', (data) ->
         $(this).remove()
            
 teacher.on 'render', (data) ->
-    console.log data
     $("#online").text "Students online: "+data.clients
     for idx in [0...data.clients]
         id = data.idNickPairs[idx].id
         nick = data.idNickPairs[idx].nick
         id_rgx = new RegExp(id, 'g') #make sure we don't add the same id twice
         nm_rgx = new RegExp(nick, 'g')
-        if !_.any( _.map( $('.container').find('.student'), (el) -> (id_rgx.test $(el).text()) and (nm_rgx.test $(el).text()) ) )
-            $(".container").append("<div class='row'><div class='span12 student'>A student is connected; id=#{id},nick=#{nick}</div></div>")
+        if !_.any( _.map( $('.container').find('.student-box'), (el) -> (id_rgx.test $(el).text()) and (nm_rgx.test $(el).text()) ) )
+            if idx % 4 == 0
+                current_row = $("<div class='row-fluid #{idx}'></div>")
+                $("#student-container").append current_row
+            if !current_row
+                current_row = $(_.last $("#student-container").children())
+            current_row.append $("<div class='student-box span3' id='#{id}'>
+                                   <span class='student-nick'>#{nick}</span>
+                                   <span class='student-id' style='display:none'>#{id}</span>
+                                  </div>")
     #also, delete any ids that are still client side but have disconnected from the server
-     _.map $('.container').find('.student'),
+     _.map $('.container').find('.student-box'),
           (el) ->
             pair_present = _.map data.idNickPairs, (p) ->
                              id_rgx = new RegExp p.id, 'g'
                              nm_rgx = new RegExp p.nick, 'g'
-                             (id_rgx.test $(el).text()) and (nm_rgx.test $(el).text())
+                             (id_rgx.test $(el).find('.student-id').text()) and (nm_rgx.test $(el).find('.student-nick').text())
             if !_.any pair_present
-                $(el).parent().remove()
+                $(el).remove()
