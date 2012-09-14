@@ -3,7 +3,23 @@ teacher = io.connect '/teacher', {'sync disconnect on unload' : true}
 teacher.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
         $(this).remove()
-           
+
+#At some point this will do something!           
+createProgress = () ->
+    "<div class='prog'>
+       <div class='lesson complete'></div>
+       <div class='lesson complete'></div>
+       <div class='lesson complete'></div>
+       <div class='lesson incomplete'></div>
+       <div class='lesson incomplete'></div>
+       <div class='lesson incomplete'></div>
+       <div class='lesson incomplete'></div>
+       <div class='lesson incomplete'></div>
+       <div class='lesson incomplete'></div>
+       <div class='lesson incomplete'></div>
+    </div>"
+
+
 teacher.on 'render', (data) ->
     $("#online").text "Students online: "+data.clients
     for idx in [0...data.clients]
@@ -17,9 +33,11 @@ teacher.on 'render', (data) ->
                 $("#student-container").append current_row
             if !current_row
                 current_row = $(_.last $("#student-container").children())
+            prog = createProgress()
             current_row.append $("<div class='student-box span3' id='#{id}'>
-                                   <span class='student-nick'>#{nick}</span>
-                                   <span class='student-id' style='display:none'>#{id}</span>
+                                   <h3 class='student-nick'>#{nick}</h3>
+                                   <h3 class='student-id' style='display:none'>#{id}</h3>
+                                    #{prog}
                                   </div>")
     #also, delete any ids that are still client side but have disconnected from the server
      _.map $('.container').find('.student-box'),
