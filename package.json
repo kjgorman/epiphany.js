@@ -12,6 +12,7 @@
     , "which": "*"
     , "express":"*"
     , "socket.io":"*"
+    , "underscore":"*"
   }, "scripts": {
     "start": "node server.js",
     "test": "mocha --require should --compilers coffee:coffee-script --colors"
@@ -29,6 +30,7 @@
     , "nib": "0.4.1"
     , "markdown": "0.3.1"
     , "which": "*"
+    , "underscore":"*"
   }, 
   "engines": {
     "node": "~0.6.x"
