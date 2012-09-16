@@ -44,7 +44,7 @@ $('#scratch').keyup ->
 output = (txt) ->
     $("#console").val $("#console").val()+txt+"\n>> " 
     cnsl = $("#console")
-    cnsl.scrollTop(cnsl[0].scrollHeight) #weird the jquery doesn't have scrollheight()
+    cnsl.scrollTop(cnsl[0].scrollHeight) #weird that jquery doesn't have scrollheight()
 
 $("#submit").click (event) ->
     data = $("#scratch").val()
@@ -52,9 +52,11 @@ $("#submit").click (event) ->
 $("#nerd").toggle (event) ->
     $("#scratch").css({"color":"#0F0", "background-color":"#000", "font":"console"})
     $("#console").css({"color":"#0F0", "background-color":"#000", "font":"console"})
+    $("#submit").addClass("btn-nerd-mode")
     $(this).text("normal mode")
 , (event) ->
     $("#scratch").css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
     $("#console").css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
+    $("#submit").removeClass("btn-nerd-mode")
     $(this).text("nerd mode")
     
