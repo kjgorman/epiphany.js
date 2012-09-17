@@ -19,11 +19,6 @@ createProgress = () ->
        <div class='lesson incomplete'></div>
     </div>"
 
-teacher.on 'foo', (data) ->
-    console.log "update"
-    console.log data
-    $("#text-"+data.id).val(data.text)
-
 teacher.on 'render', (data) ->
     console.log 'rendering'
     console.log data
