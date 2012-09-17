@@ -59,8 +59,6 @@ io.of('/student')
         io.of('/teacher').emit 'render', onlineData()
 
     socket.on 'edit', (data) ->
-        idDataVals = {id:socket.id, text:data.text}
-        console.log idDataVals
         socket.emit 'online', onlineData()
         io.of("/teacher").emit 'render', onlineData()
 
