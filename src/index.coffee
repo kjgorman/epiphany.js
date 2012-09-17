@@ -1,7 +1,7 @@
-express = require 'express'
+Bexpress = require 'express'
 stylus  = require 'stylus'
 assets  = require 'connect-assets'
-http    = require 'http'
+h0;115;0cttp    = require 'http'
 _       = require 'underscore'
 
 app = express()
@@ -59,6 +59,7 @@ io.of('/student')
         io.of('/teacher').emit 'render', onlineData()
 
     socket.on 'edit', (data) ->
+        console.log "aaaaaaaaaaaaaaaaaaaaa huge and stupid string that should be in the logsaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         io.of('/teacher').emit 'render', data
 
     socket.on 'disconnect', (data) ->
