@@ -39,10 +39,8 @@ onlineData = () ->
     sClients = studentsOnline()
     nickPairs = []
     nickPairs.push (idNickPairForClient client) for client in sClients 
-    console.log nickPairs
     return {clients:sClients.length, idNickPairs:nickPairs}
 
-gdata = {clients:0}
 io.sockets.manager.settings.blacklist = []
 
 io.of('/student')
@@ -61,12 +59,10 @@ io.of('/student')
         io.of('/teacher').emit 'render', onlineData()
 
     socket.on 'edit', (data) ->
-        gdata.text = data.text
         idDataVals = {id:socket.id, text:data.text}
-        console.log "RECEIVED EDIT: BORADCASTING: ID: "+idDataVals.id" TEXT:"+idDataVals.text
-        io.of("/teacher").emit 'edit', idDataVals
+        console.log idDataVals
         socket.emit 'online', onlineData()
-        return 
+        io.of("/teacher").emit 'edit', idDataVals
 
     socket.on 'disconnect', (data) ->
         online = onlineData()
