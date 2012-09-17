@@ -37,15 +37,16 @@ teacher.on 'render', (data) ->
             current_row.append $("<div class='student-box span3' id='#{id}'>
                                    <h3 class='student-nick' id='nick-#{id}'>#{nick}</h3>
                                    <div class='hide' id='text-container-#{id}'>
-                                       <textarea rows=10 class='span3' id='text-#{id}'></textarea>
+                                       <textarea rows=10 class='span12' id='text-#{id}'></textarea>
                                    </div>
                                    <h3 class='student-id' style='display:none'>#{id}</h3>
                                     #{prog}
                                   </div>")
-            $("#nick-#{id}").toggle () ->
-                $("#text-container-#{id}").show("explode", 1000);
+            ((closed_id) ->
+              $("#nick-#{closed_id}").toggle () ->
+                $("#text-container-#{closed_id}").show("explode", 1000);
             , () ->
-                $("#text-container-#{id}").hide("explode", 1000);
+                $("#text-container-#{closed_id}").hide("explode", 1000);)(id);
     #also, delete any ids that are still client side but have disconnected from the server
      _.map $('.container').find('.student-box'),
           (el) ->
