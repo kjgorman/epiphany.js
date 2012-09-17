@@ -45,7 +45,7 @@ teacher.on 'render', (data) ->
             ((closed_id) ->
               $("#nick-#{closed_id}").toggle () ->
                 $("#text-container-#{closed_id}").show("explode", 1000);
-            , () ->
+              , () ->
                 $("#text-container-#{closed_id}").hide("explode", 1000);)(id);
     #also, delete any ids that are still client side but have disconnected from the server
      _.map $('.container').find('.student-box'),
