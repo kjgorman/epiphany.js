@@ -51,7 +51,7 @@ teacher.on 'render', (data) ->
             .each () ->
                     console.log "calling click toggle listener on id #{id}"
                     ((closed_id) ->
-                      $(closed_student).toggle () ->
+                      $(this).toggle () ->
                         console.log "the closure id is #{closed_id}"                
                         $("#text-container-#{closed_id}").show("explode", 1000);
                       , () ->
