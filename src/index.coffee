@@ -43,6 +43,10 @@ onlineData = () ->
 
 io.sockets.manager.settings.blacklist = []
 
+io.of('/teacher')
+  .on 'connection', (socket) ->
+    socket.emit 'render', onlineData()
+
 io.of('/student')
   .on 'connection', (socket) ->
     online_data = onlineData() #don't need to recompute this for the next few emissions
@@ -58,7 +62,7 @@ io.of('/student')
         io.of('/teacher').emit 'render', onlineData()
     socket.on 'edit', (data) ->
         io.of('/student').emit 'edit', data
-        io.of('/teacher').emit 'render', onlineData()
+        io.of('/teacher').emit 'update', onlineData()
                 
     socket.on 'disconnect', (data) ->
         online = onlineData()
@@ -68,9 +72,7 @@ io.of('/student')
         io.of('/student').emit 'online',  onlineLessThis
         io.of('/teacher').emit 'render', onlineLessThis
   
-io.of('/teacher')
-  .on 'connection', (socket) ->
-    socket.emit 'render', onlineData()    
+    
 
         
 #unfortunately heroku doesn't support cool websockets : (
