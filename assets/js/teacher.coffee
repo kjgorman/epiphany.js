@@ -42,8 +42,10 @@ teacher.on 'render', (data) ->
                                    <h3 class='student-id' style='display:none'>#{id}</h3>
                                     #{prog}
                                   </div>")
-            $("#nick-#{id}").click () ->
+            $("#nick-#{id}").toggle () ->
                 $("#text-container-#{id}").show("explode", 1000);
+            , () ->
+                $("#text-container-#{id}").hide("explode", 1000);
     #also, delete any ids that are still client side but have disconnected from the server
      _.map $('.container').find('.student-box'),
           (el) ->
