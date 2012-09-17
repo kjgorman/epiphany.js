@@ -59,8 +59,7 @@ io.of('/student')
         io.of('/teacher').emit 'render', onlineData()
 
     socket.on 'edit', (data) ->
-        console.log "aaaaaaaaaaaaaaaaaaaaa huge and stupid string that should be in the logsaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        io.of('/teacher').emit 'render', data
+        io.of('/teacher').send 'render', data
 
     socket.on 'disconnect', (data) ->
         online = onlineData()
