@@ -57,10 +57,9 @@ io.of('/student')
     socket.on 'set name', (name) ->
         socket.set 'nick', name
         io.of('/teacher').emit 'render', onlineData()
-
     socket.on 'edit', (data) ->
-        io.of('/teacher').send 'render', data
-
+        socket.emit 'edit', data
+        io.of('/teacher').emit 'edit', data
     socket.on 'disconnect', (data) ->
         online = onlineData()
         nickPairsLessThis = _.filter online.idNickPairs, (o) -> o.id != socket.id
@@ -68,7 +67,7 @@ io.of('/student')
         gdata.clients = online.clients
         io.of('/student').emit 'online',  onlineLessThis
         io.of('/teacher').emit 'render', onlineLessThis
-
+  
 io.of('/teacher')
   .on 'connection', (socket) ->
     socket.emit 'render', onlineData()    
