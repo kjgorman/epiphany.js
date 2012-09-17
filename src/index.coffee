@@ -27,19 +27,19 @@ srvr.listen port
 console.log "Listening on #{port}\nPress CTRL-C to stop server."
 
 studentsOnline = () ->
-    return io.of('/student').clients()
+    io.of('/student').clients()
 
 idNickPairForClient = (client) ->
         pair = {}
         pair.id = client.id
         pair.nick = client.store.data.nick
-        return pair
+        pair
 
 onlineData = () ->
     sClients = studentsOnline()
     nickPairs = []
     nickPairs.push (idNickPairForClient client) for client in sClients 
-    return {clients:sClients.length, idNickPairs:nickPairs}
+    {clients:sClients.length, idNickPairs:nickPairs}
 
 io.sockets.manager.settings.blacklist = []
 
@@ -57,9 +57,9 @@ io.of('/student')
         socket.set 'nick', name
         io.of('/teacher').emit 'render', onlineData()
     socket.on 'edit', (data) ->
-        socket.broadcast.emit 'edit', data
-        io.sockets.emit 'render', data
-        socket.broadcast.to('/teacher').emit 'render', data
+        io.of('/student').emit 'edit', data
+        io.of('/teacher').emit 'render', onlineData()
+                
     socket.on 'disconnect', (data) ->
         online = onlineData()
         nickPairsLessThis = _.filter online.idNickPairs, (o) -> o.id != socket.id
