@@ -28,7 +28,7 @@ teacher.on 'render', (data) ->
         id_rgx = new RegExp(id, 'g') #make sure we don't add the same id twice
         nm_rgx = new RegExp(nick, 'g')
         if !_.any( _.map( $('.container').find('.student-box'), (el) -> (id_rgx.test $(el).text()) and (nm_rgx.test $(el).text()) ) )
-            if idx % 4 == 0
+            if idx % 2 == 0
                 current_row = $("<div class='row-fluid #{idx}'></div>")
                 $("#student-container").append current_row
             if !current_row
@@ -37,7 +37,7 @@ teacher.on 'render', (data) ->
             current_row.append $("<div class='student-box span6' id='#{id}'>
                                    <h3 class='student-nick' id='nick-#{id}'>#{nick}</h3>
                                    <div class='hide' id='text-container-#{id}'>
-                                       <textarea rows=10 class='span6' id='text-#{id}'></textarea>
+                                       <textarea rows=10 class='span10' id='text-#{id}'></textarea>
                                    </div>
                                    <h3 class='student-id' style='display:none'>#{id}</h3>
                                     #{prog}
