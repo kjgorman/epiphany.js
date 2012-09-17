@@ -46,7 +46,7 @@ io.sockets.manager.settings.blacklist = []
 io.of('/teacher')
   .on 'connection', (socket) ->
     socket.emit 'render', onlineData()
-    socket.emit 'update', {text:"test"}
+    socket.emit 'update', "foo"
     return
 
 io.of('/student')
