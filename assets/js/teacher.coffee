@@ -39,21 +39,21 @@ teacher.on 'render', (data) ->
             if !current_row
                 current_row = $(_.last $("#student-container").children())
             prog = createProgress()
-            current_row.append $("<div class='student-box span6' id='#{id}'>
-                                   <h3 class='student-nick' id='nick-#{id}'>#{nick}</h3>
-                                   <div class='hide' id='text-container-#{id}'>
-                                       <textarea rows=10 class='span10' id='text-#{id}'></textarea>
-                                   </div>
-                                   <h3 class='student-id' style='display:none'>#{id}</h3>
-                                    #{prog}
-                                  </div>")
-            console.log "calling click toggle listener on id #{id}"
-            ((closed_id) ->
-              $("#nick-#{closed_id}").toggle () ->
-                console.log "the closure id is #{closed_id}"                
-                $("#text-container-#{closed_id}").show("explode", 1000);
-              , () ->
-                $("#text-container-#{closed_id}").hide("explode", 1000);)(id);
+            $("<div class='student-box span6' id='#{id}'>
+                <h3 class='student-nick' id='nick-#{id}'>#{nick}</h3>
+                 <div class='hide' id='text-container-#{id}'>
+                  <textarea rows=10 class='span10' id='text-#{id}'></textarea>
+                 </div>
+                <h3 class='student-id' style='display:none'>#{id}</h3>
+                #{prog}
+               </div>").appendTo(current_row).each(() ->
+               console.log "calling click toggle listener on id #{id}"
+               ((closed_id) ->
+                 $(closed_student).toggle () ->
+                   console.log "the closure id is #{closed_id}"                
+                   $("#text-container-#{closed_id}").show("explode", 1000);
+                 , () ->
+                   $("#text-container-#{closed_id}").hide("explode", 1000);)(id);
     #also, delete any ids that are still client side but have disconnected from the server
      _.map $('.container').find('.student-box'),
           (el) ->
