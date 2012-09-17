@@ -48,14 +48,14 @@ teacher.on 'render', (data) ->
                 #{prog}
                </div>")
             .appendTo(current_row)
-            .each(() ->
+            .each () ->
                     console.log "calling click toggle listener on id #{id}"
                     ((closed_id) ->
                       $(closed_student).toggle () ->
-                      console.log "the closure id is #{closed_id}"                
-                      $("#text-container-#{closed_id}").show("explode", 1000);
-                    , () ->
-                      $("#text-container-#{closed_id}").hide("explode", 1000);)(id);
+                        console.log "the closure id is #{closed_id}"                
+                        $("#text-container-#{closed_id}").show("explode", 1000);
+                      , () ->
+                        $("#text-container-#{closed_id}").hide("explode", 1000);)(id);
     #also, delete any ids that are still client side but have disconnected from the server
     _.map $('.container').find('.student-box'),
           (el) ->
