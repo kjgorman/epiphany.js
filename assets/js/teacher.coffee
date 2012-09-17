@@ -23,7 +23,6 @@ teacher.on 'edit', (data) ->
     console.log(data)
     $("#text-"+data.id).val(data.text)
 
-
 teacher.on 'render', (data) ->
     console.log 'rendering'
     console.log data
