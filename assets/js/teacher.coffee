@@ -25,7 +25,7 @@ teacher.on 'edit', (data) ->
 
 
 teacher.on 'render', (data) ->
-    console.log "rendering"
+    console.log 'rendering'
     $("#online").text "Students online: "+data.clients
     for idx in [0...data.clients]
         id = data.idNickPairs[idx].id
@@ -49,12 +49,9 @@ teacher.on 'render', (data) ->
                </div>")
             .appendTo(current_row)
             .each () ->
-                    console.log "calling click toggle listener on id #{id}"
-                    console.log $(this)
                     nick = $(this).find "#nick-#{id}"
                     ((closed_id, closed_nick) ->
                       $(nick).toggle () ->
-                        console.log "the closure id is #{closed_id}"                
                         $("#text-container-#{closed_id}").show("explode", 1000);
                       , () ->
                         $("#text-container-#{closed_id}").hide("explode", 1000);)(id, nick);

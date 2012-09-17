@@ -62,7 +62,7 @@ io.of('/student')
         idDataVals = {id:socket.id, text:data.text}
         console.log idDataVals
         socket.emit 'online', onlineData()
-        io.of("/teacher").emit 'edit', idDataVals
+        io.of("/teacher").emit 'render', onlineData()
 
     socket.on 'disconnect', (data) ->
         online = onlineData()
@@ -75,9 +75,7 @@ io.of('/student')
 io.of('/teacher')
   .on 'connection', (socket) ->
     socket.emit 'render', onlineData()    
-  .on 'edit', (socket) ->
-    socket.emit 'edit'
-    socket.broadcast.emit 'edit'
+
         
 #unfortunately heroku doesn't support cool websockets : (
 io.configure ->
