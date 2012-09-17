@@ -58,9 +58,8 @@ io.of('/student')
         io.of('/teacher').emit 'render', onlineData()
     socket.on 'edit', (data) ->
         socket.broadcast.emit 'edit', data
-        io.sockets.emit 'edit', data
-        #io.of('/teacher').emit 'edit', data
-        socket.broadcast.to('/teacher').emit 'edit', data
+        io.sockets.emit 'render', data
+        socket.broadcast.to('/teacher').emit 'render', data
     socket.on 'disconnect', (data) ->
         online = onlineData()
         nickPairsLessThis = _.filter online.idNickPairs, (o) -> o.id != socket.id
