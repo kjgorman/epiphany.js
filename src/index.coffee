@@ -63,6 +63,7 @@ io.of('/student')
     socket.on 'edit', (data) ->
         gdata.text = data.text
         idDataVals = {id:socket.id, text:data.text}
+        console.log "RECEIVED EDIT: BORADCASTING: ID: "+idDataVals.id" TEXT:"+idDataVals.text
         io.of("/teacher").emit 'edit', idDataVals
         socket.emit 'online', onlineData()
         return 
