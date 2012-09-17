@@ -57,7 +57,7 @@ teacher.on 'render', (data) ->
                     , () ->
                       $("#text-container-#{closed_id}").hide("explode", 1000);)(id);
     #also, delete any ids that are still client side but have disconnected from the server
-     _.map $('.container').find('.student-box'),
+    _.map $('.container').find('.student-box'),
           (el) ->
             pair_present = _.map data.idNickPairs, (p) ->
                              id_rgx = new RegExp p.id, 'g'
