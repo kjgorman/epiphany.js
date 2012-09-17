@@ -1,7 +1,7 @@
 Bexpress = require 'express'
 stylus  = require 'stylus'
 assets  = require 'connect-assets'
-h0;115;0cttp    = require 'http'
+http    = require 'http'
 _       = require 'underscore'
 
 app = express()
@@ -45,7 +45,6 @@ io.sockets.manager.settings.blacklist = []
 
 io.of('/student')
   .on 'connection', (socket) ->
-
     online_data = onlineData() #don't need to recompute this for the next few emissions
     gdata.clients = online_data.clients
     socket.emit 'online', online_data
@@ -58,7 +57,7 @@ io.of('/student')
         socket.set 'nick', name
         io.of('/teacher').emit 'render', onlineData()
     socket.on 'edit', (data) ->
-        socket.emit 'edit', data
+        socket.broadcast.emit 'edit', data
         io.of('/teacher').emit 'edit', data
     socket.on 'disconnect', (data) ->
         online = onlineData()
