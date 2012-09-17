@@ -35,10 +35,15 @@ teacher.on 'render', (data) ->
                 current_row = $(_.last $("#student-container").children())
             prog = createProgress()
             current_row.append $("<div class='student-box span3' id='#{id}'>
-                                   <h3 class='student-nick'>#{nick}</h3>
+                                   <h3 class='student-nick' id='nick-#{id}'>#{nick}</h3>
+                                   <div class='hide' id='text-container-#{id}'>
+                                       <textarea rows=10 class='span3' id='text-#{id}'></textarea>
+                                   </div>
                                    <h3 class='student-id' style='display:none'>#{id}</h3>
                                     #{prog}
                                   </div>")
+            $("#nick-#{id}").click () ->
+                $("#text-container-#{id}").show("explode", 1000);
     #also, delete any ids that are still client side but have disconnected from the server
      _.map $('.container').find('.student-box'),
           (el) ->

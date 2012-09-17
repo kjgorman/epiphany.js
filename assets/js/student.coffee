@@ -55,10 +55,12 @@ $("#nerd").toggle (event) ->
     $('#scratch').css({"color":"#0F0", "background-color":"#000", "font":"console"})
     $('#console').css({"color":"#0F0", "background-color":"#000", "font":"console"})
     $(this).text("normal mode")
+    $("#submit").addClass("btn-nerd-mode")
 , (event) ->
     $('body').css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
     $('body').css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
     $('#scratch').css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
     $('#console').css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
     $(this).text("nerd mode")
+    $("#submit").removeClass("btn-nerd-mode")
     
