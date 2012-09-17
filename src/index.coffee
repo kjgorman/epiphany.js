@@ -59,7 +59,7 @@ io.of('/student')
         io.of('/teacher').emit 'render', onlineData()
 
     socket.on 'edit', (data) ->
-        socket.emit 'online', onlineData()
+        #socket.emit 'online', onlineData()
         io.of("/teacher").emit 'render', onlineData()
 
     socket.on 'disconnect', (data) ->
