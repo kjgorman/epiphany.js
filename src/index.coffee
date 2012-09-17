@@ -62,7 +62,8 @@ io.of('/student')
 
     socket.on 'edit', (data) ->
         gdata.text = data.text
-        socket.broadcast.emit 'edit', gdata
+        idDataVals = {id:socket.id, text:data.text}
+        io.of("/teacher").emit 'edit', idDataVals
         socket.emit 'online', onlineData()
         return 
 

@@ -19,6 +19,9 @@ createProgress = () ->
        <div class='lesson incomplete'></div>
     </div>"
 
+teacher.on 'edit', (data) ->
+    $("#text-"+data.id).val(data.text)
+
 
 teacher.on 'render', (data) ->
     $("#online").text "Students online: "+data.clients
