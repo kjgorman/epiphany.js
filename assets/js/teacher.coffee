@@ -25,6 +25,7 @@ teacher.on 'edit', (data) ->
 
 
 teacher.on 'render', (data) ->
+    console.log "rendering"
     $("#online").text "Students online: "+data.clients
     for idx in [0...data.clients]
         id = data.idNickPairs[idx].id
@@ -46,8 +47,10 @@ teacher.on 'render', (data) ->
                                    <h3 class='student-id' style='display:none'>#{id}</h3>
                                     #{prog}
                                   </div>")
+            console.log "calling click toggle listener on id #{id}"
             ((closed_id) ->
               $("#nick-#{closed_id}").toggle () ->
+                console.log "the closure id is #{closed_id}"                
                 $("#text-container-#{closed_id}").show("explode", 1000);
               , () ->
                 $("#text-container-#{closed_id}").hide("explode", 1000);)(id);
