@@ -50,8 +50,9 @@ teacher.on 'render', (data) ->
             .appendTo(current_row)
             .each () ->
                     console.log "calling click toggle listener on id #{id}"
+                    console.log $(this)
                     ((closed_id) ->
-                      $(this).toggle () ->
+                      $("#nick-#{id}").toggle () ->
                         console.log "the closure id is #{closed_id}"                
                         $("#text-container-#{closed_id}").show("explode", 1000);
                       , () ->
