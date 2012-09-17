@@ -34,10 +34,10 @@ teacher.on 'render', (data) ->
             if !current_row
                 current_row = $(_.last $("#student-container").children())
             prog = createProgress()
-            current_row.append $("<div class='student-box span3' id='#{id}'>
+            current_row.append $("<div class='student-box span6' id='#{id}'>
                                    <h3 class='student-nick' id='nick-#{id}'>#{nick}</h3>
                                    <div class='hide' id='text-container-#{id}'>
-                                       <textarea rows=10 class='span12' id='text-#{id}'></textarea>
+                                       <textarea rows=10 class='span6' id='text-#{id}'></textarea>
                                    </div>
                                    <h3 class='student-id' style='display:none'>#{id}</h3>
                                     #{prog}
