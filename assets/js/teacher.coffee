@@ -19,7 +19,7 @@ createProgress = () ->
        <div class='lesson incomplete'></div>
     </div>"
 
-teacher.on 'update', (data) ->
+teacher.on 'foo', (data) ->
     console.log "update"
     console.log data
     $("#text-"+data.id).val(data.text)
