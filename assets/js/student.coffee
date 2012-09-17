@@ -35,7 +35,7 @@ $('#scratch').keyup ->
       if hasDollar
           dollarCharacterConsideredHarmful()
           return
-      student.emit 'edit', {text:$(this).val()}
+      console.log(student.emit 'edit', {text:$(this).val()})
     else
       if !hasDollar
           $(".alert-error").hide 'explode', 1000, () -> $(this).remove()
