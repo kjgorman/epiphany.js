@@ -26,6 +26,7 @@ teacher.on 'edit', (data) ->
 
 teacher.on 'render', (data) ->
     console.log 'rendering'
+    consoel.log data
     $("#online").text "Students online: "+data.clients
     for idx in [0...data.clients]
         id = data.idNickPairs[idx].id
