@@ -20,7 +20,8 @@ createProgress = () ->
     </div>"
 
 teacher.on 'update', (data) ->
-    console.log(data)
+    console.log "update"
+    console.log data
     $("#text-"+data.id).val(data.text)
 
 teacher.on 'render', (data) ->

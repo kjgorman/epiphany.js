@@ -47,6 +47,7 @@ io.of('/teacher')
   .on 'connection', (socket) ->
     socket.emit 'render', onlineData()
     socket.emit 'update', {text:"test"}
+    return
 
 io.of('/student')
   .on 'connection', (socket) ->
