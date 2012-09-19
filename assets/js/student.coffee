@@ -7,6 +7,10 @@ student.on 'edit', (data) ->
 student.on 'online', (data) ->
     $("#online").text "Users connected: "+data.clients
 
+student.on 'class-data', (data) ->
+    $("#class-num").text(data.class_num)
+    $("#class-text").text(data.class_text)
+
 student.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
         $(this).remove()

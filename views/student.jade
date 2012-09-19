@@ -2,11 +2,13 @@ extends layout
 block content
   .container
     h1
-        | Write Some Javascript here
+        | Class 
+        span#class-num
     h3#connecting.pull-left
         | connecting...
     h3.pull-right#online
         | Users connected: 0
+    div#class-text.well
     div.row
         div.span12
             textarea(rows='10', readonly='readonly')#scratch.span12
