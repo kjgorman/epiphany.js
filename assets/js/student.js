@@ -7,8 +7,6 @@
   });
 
   student.on('edit', function(data) {
-    console.log("edit received");
-    console.log(data);
     return $("#scratch").val(data['text']);
   });
 
@@ -18,11 +16,6 @@
   });
 
   student.on('class', function(data) {
-    console.log(data);
-    console.log(data.clsnum);
-    console.log(data.clstext);
-    console.log($("#class-num").text());
-    console.log($("#class-text").text());
     $("#class-num").text(data.clsnum);
     return $("#class-text").text(data.clstext);
   });

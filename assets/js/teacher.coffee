@@ -4,6 +4,10 @@ teacher.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
         $(this).remove()
 
+teacher.on 'update', (data) ->
+    console.log data
+    $("#text-"+data.sid).val(data.text)
+
 #At some point this will do something!           
 createProgress = () ->
     "<div class='prog'>

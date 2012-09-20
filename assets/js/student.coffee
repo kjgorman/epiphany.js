@@ -1,20 +1,12 @@
 student = io.connect '/student', {'sync disconnect on unload' : true}
 
 student.on 'edit', (data) ->
-    console.log "edit received"
-    console.log data
     $("#scratch").val data['text']
 student.on 'online', (data) ->
     console.log data
     $("#online").text "Users connected: "+data.clients
 
 student.on 'class', (data) ->
-    console.log data
-    console.log data.clsnum
-    console.log data.clstext
-    console.log $("#class-num").text()
-    console.log $("#class-text").text()
-    #hm
     $("#class-num").text(data.clsnum)
     $("#class-text").text(data.clstext)
 

@@ -90,8 +90,10 @@ io.of('/student').on('connection', function(socket) {
     return io.of('/teacher').emit('render', onlineData());
   });
   socket.on('edit', function(data) {
-    io.of('/student').emit('edit', data);
-    return io.of('/teacher').emit('render', onlineData());
+    return io.of('/teacher').emit('update', {
+      sid: socket.id,
+      text: data.text
+    });
   });
   return socket.on('disconnect', function(data) {
     var nickPairsLessThis, online, onlineLessThis;

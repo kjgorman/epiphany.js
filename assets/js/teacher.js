@@ -14,6 +14,11 @@
     });
   });
 
+  teacher.on('update', function(data) {
+    console.log(data);
+    return $("#text-" + data.sid).val(data.text);
+  });
+
   createProgress = function() {
     return "<div class='prog'>       <div class='lesson complete'></div>       <div class='lesson complete'></div>       <div class='lesson complete'></div>       <div class='lesson incomplete'></div>       <div class='lesson incomplete'></div>       <div class='lesson incomplete'></div>       <div class='lesson incomplete'></div>       <div class='lesson incomplete'></div>       <div class='lesson incomplete'></div>       <div class='lesson incomplete'></div>    </div>";
   };
