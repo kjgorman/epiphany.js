@@ -55,7 +55,7 @@ io.of('/student')
     cls_data.cls-num = 1
     cls_data.cls-text = 'The Fibonacci sequence is formed by adding the preceding two terms to find the next,
                          beginning with 0 and 1, e.g. 0,1,1,2,3,5,8... Find the 200th term of the sequence'
-    socket.emit 'online', 
+    socket.emit 'online', cls_data
 
     socket.broadcast.emit 'online', online_data
     io.of('/teacher').emit 'render', online_data
