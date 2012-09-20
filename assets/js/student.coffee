@@ -10,8 +10,8 @@ student.on 'online', (data) ->
 
 student.on 'class', (data) ->
     console.log data
-    $("#class-num").text(data.class_num)
-    $("#class-text").text(data.class_text)
+    $("#class-num").text(data.cls_num)
+    $("#class-text").text(data.cls_text)
 
 student.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->

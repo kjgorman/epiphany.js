@@ -1,4 +1,4 @@
-Bexpress = require 'express'
+express = require 'express'
 stylus  = require 'stylus'
 assets  = require 'connect-assets'
 http    = require 'http'
