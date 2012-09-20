@@ -73,7 +73,6 @@ io.of('/student')
         online = onlineData()
         nickPairsLessThis = _.filter online.idNickPairs, (o) -> o.id != socket.id
         onlineLessThis = {clients:online.clients-1, idNickPairs:nickPairsLessThis}
-        gdata.clients = online.clients
         io.of('/student').emit 'online',  onlineLessThis
         io.of('/teacher').emit 'render', onlineLessThis
   
