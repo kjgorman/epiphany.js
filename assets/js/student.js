@@ -19,8 +19,12 @@
 
   student.on('class', function(data) {
     console.log(data);
-    $("#class-num").text(data.cls_num);
-    return $("#class-text").text(data.cls_text);
+    console.log(data.clsnum);
+    console.log(data.clstext);
+    console.log($("#class-num").text());
+    console.log($("#class-text").text());
+    $("#class-num").text(data.clsnum);
+    return $("#class-text").text(data.clstext);
   });
 
   student.on('connect', function(data) {
