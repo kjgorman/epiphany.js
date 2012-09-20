@@ -8,6 +8,7 @@ student.on 'online', (data) ->
     $("#online").text "Users connected: "+data.clients
 
 student.on 'class-data', (data) ->
+    console.log data
     $("#class-num").text(data.class_num)
     $("#class-text").text(data.class_text)
 
