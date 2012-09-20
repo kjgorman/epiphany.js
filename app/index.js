@@ -70,7 +70,10 @@ onlineData = function() {
 io.sockets.manager.settings.blacklist = [];
 
 io.of('/teacher').on('connection', function(socket) {
-  return socket.emit('render', onlineData());
+  socket.emit('render', onlineData());
+  return socket.on('edit', function(data) {
+    return io.sockets.socket(data.sid).emit('edit', data.text);
+  });
 });
 
 io.of('/student').on('connection', function(socket) {

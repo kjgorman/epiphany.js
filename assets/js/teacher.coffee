@@ -8,6 +8,9 @@ teacher.on 'update', (data) ->
     console.log data
     $("#text-"+data.sid).val(data.text)
 
+$(".container").on "click", "textarea.span10", (e) ->
+        teacher.emit 'edit', {sid:$(this).parent().parent().attr('id'), text:$(this).val()}
+
 #At some point this will do something!           
 createProgress = () ->
     "<div class='prog'>

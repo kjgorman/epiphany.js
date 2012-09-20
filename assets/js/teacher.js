@@ -19,6 +19,13 @@
     return $("#text-" + data.sid).val(data.text);
   });
 
+  $(".container").on("click", "textarea.span10", function(e) {
+    return teacher.emit('edit', {
+      sid: $(this).parent().parent().attr('id'),
+      text: $(this).val()
+    });
+  });
+
   createProgress = function() {
     return "<div class='prog'>       <div class='lesson complete'></div>       <div class='lesson complete'></div>       <div class='lesson complete'></div>       <div class='lesson incomplete'></div>       <div class='lesson incomplete'></div>       <div class='lesson incomplete'></div>       <div class='lesson incomplete'></div>       <div class='lesson incomplete'></div>       <div class='lesson incomplete'></div>       <div class='lesson incomplete'></div>    </div>";
   };
