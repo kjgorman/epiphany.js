@@ -49,8 +49,7 @@ io.of('/teacher')
 
 io.of('/student')
   .on 'connection', (socket) ->
-    online_data = onlineData() #don't need to recompute this for the next few emissions
-    gdata.clients = online_data.clients
+    online_data = onlineData() #don't need to recompute this for the next few emissions 
     cls_data = onlineData()
     cls_data.clsnum = 1
     cls_data.clstext = 'The Fibonacci sequence is formed by adding the preceding two terms to find the next,
