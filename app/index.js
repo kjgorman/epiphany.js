@@ -71,6 +71,7 @@ getSocketById = function(sid) {
   var client, clients;
   clients = io.sockets.clients();
   client = null;
+  console.log("BY ID: " + clients);
   return _.map(clients, function(c) {
     return console.log(c.id + " " + sid + " " + (c.id === sid));
   });
