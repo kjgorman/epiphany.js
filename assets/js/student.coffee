@@ -14,6 +14,7 @@ student.on 'class', (data) ->
     console.log data.clstext
     console.log $("#class-num").text()
     console.log $("#class-text").text()
+    #hm
     $("#class-num").text(data.clsnum)
     $("#class-text").text(data.clstext)
 
