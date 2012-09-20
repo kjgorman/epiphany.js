@@ -5,9 +5,10 @@ student.on 'edit', (data) ->
     console.log data
     $("#scratch").val data['text']
 student.on 'online', (data) ->
+    console.log data
     $("#online").text "Users connected: "+data.clients
 
-student.on 'class-data', (data) ->
+student.on 'class', (data) ->
     console.log data
     $("#class-num").text(data.class_num)
     $("#class-text").text(data.class_text)

@@ -52,7 +52,7 @@ io.of('/student')
     online_data = onlineData() #don't need to recompute this for the next few emissions
     gdata.clients = online_data.clients
     socket.emit 'online', online_data
-    socket.emit 'class-data', {}
+    socket.emit 'class', {cls_num:1}
     # {class_num:1, class_text:"The fibonacci sequence adds the last two numbers in the sequence to find the next, e.g. 0,1,1,2,3,5. Find the 200th number"}
     socket.broadcast.emit 'online', online_data
     io.of('/teacher').emit 'render', online_data
