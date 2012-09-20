@@ -52,9 +52,10 @@ io.of('/student')
     online_data = onlineData() #don't need to recompute this for the next few emissions
     gdata.clients = online_data.clients
     cls_data = onlineData()
-    cls_data.cls-num = 1
-    cls_data.cls-text = 'The Fibonacci sequence is formed by adding the preceding two terms to find the next,
+    cls_data.clsnum = 1
+    cls_data.clstext = 'The Fibonacci sequence is formed by adding the preceding two terms to find the next,
                          beginning with 0 and 1, e.g. 0,1,1,2,3,5,8... Find the 200th term of the sequence'
+    console.log cls_data
     socket.emit 'online', cls_data
 
     socket.broadcast.emit 'online', online_data
