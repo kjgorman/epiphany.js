@@ -1,0 +1,5 @@
+({
+  "1":{"clstext":"Javascript is weakly typed, this means you can have equality between two elements of different types, e.g. '1'==1 => true. This means that there are some interesting (and counter intuitive) facets to equality in javascript. Play around with various equalities before using output(\"'1' === 1\") to progress (p.s. can you work out what the '===' operator does?)", "clsans":"'1' === 1"},
+  "2":{"clstext":"The Fibonacci sequence is formed by adding the preceding two terms to find the next, beginning with 0 and 1, e.g. 0,1,1,2,3,5,8... Find the 50th term of the sequence", "clsans":12586269025},
+  "3":{"clstext":"should add some more classes", "clsans":"there is none"}
+})

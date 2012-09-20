@@ -1,21 +1,34 @@
 student = io.connect '/student', {'sync disconnect on unload' : true}
 
+current_answer = -1
+
 student.on 'edit', (data) ->
-    console.log data
-    if data.sid == student.id
+    if data.sid == student.sid
             $("#scratch").val data['text']
 student.on 'online', (data) ->
     $("#online").text "Users connected: "+data.clients
 
+student.on 'sid', (sid) ->
+    student.sid = sid
+    console.log student.sid
+
 student.on 'class', (data) ->
+    console.log data
     $("#class-num").text(data.clsnum)
     $("#class-text").text(data.clstext)
+    current_answer = data.clsans
 
 student.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
         $(this).remove()
     $("#scratch").attr('readonly', false)
-    student.emit 'set name', 'test user'
+    student.emit 'set name', 'user'
+
+$("#set-nick-btn").click () ->
+    potenNick = $("#set-nick-input").val()
+    if potenNick != ""
+        student.emit 'set name', potenNick
+        $("#show-nick").text("Hi, #{potenNick}!") 
 
 $("#scratch").keydown (e) -> 
     if e.keyCode == 9
@@ -49,9 +62,16 @@ $('#scratch').keyup ->
       
 
 output = (txt) ->
-    $("#console").val $("#console").val()+txt+"\n>> " 
-    cnsl = $("#console")
-    cnsl.scrollTop(cnsl[0].scrollHeight) #weird that jquery doesn't have scrollheight()
+    if txt == current_answer
+        levelUpModal = $("<div class='modal hide fade'>
+                           <div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button></div>
+                           <div class='modal-body'><h1>Well done, that's correct!</h1></div>
+                           <div class='modal-footer centered'><a href='#' class='btn btn-large btn-success' data-dismiss='modal'>Next Lesson</a></div>
+                          </div>").modal()
+        student.emit 'level up'
+    $cnsl = $("#console")        
+    $cnsl.val $cnsl.val()+txt+"\n>> " 
+    $cnsl.scrollTop($cnsl[0].scrollHeight) #weird that jquery doesn't have scrollheight()
 
 $("#submit").click (event) ->
     data = $("#scratch").val()

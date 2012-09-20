@@ -1,8 +1,10 @@
+#author: kjgorman.com
 express = require 'express'
 stylus  = require 'stylus'
 assets  = require 'connect-assets'
 http    = require 'http'
 _       = require 'underscore'
+fs      = require 'fs'
 
 app = express()
 # Add Connect Assets
@@ -26,6 +28,13 @@ io = (require 'socket.io').listen srvr
 srvr.listen port
 console.log "Listening on #{port}\nPress CTRL-C to stop server."
 
+cls = ""
+
+fs.readFile "class.json", "utf8", (err,data) ->
+        if err
+                console.log "COULD NOT LOAD CLASS"
+        cls = eval(data)
+
 studentsOnline = () ->
     io.of('/student').clients()
 
@@ -41,6 +50,15 @@ onlineData = () ->
     nickPairs.push (idNickPairForClient client) for client in sClients 
     {clients:sClients.length, idNickPairs:nickPairs}
 
+classData = (clsnum) ->
+    if !cls[clsnum]
+        {}
+    cls_data = {}
+    cls_data.clsnum = clsnum
+    cls_data.clstext = cls[clsnum].clstext
+    cls_data.clsans = cls[clsnum].clsans
+    cls_data
+
 io.sockets.manager.settings.blacklist = []
 
 io.of('/teacher')
@@ -53,12 +71,11 @@ io.of('/teacher')
 io.of('/student')
   .on 'connection', (socket) ->
     online_data = onlineData() #don't need to recompute this for the next few emissions
-    cls_data = {}
-    cls_data.clsnum = 1
-    cls_data.clstext = 'The Fibonacci sequence is formed by adding the preceding two terms to find the next,
-                         beginning with 0 and 1, e.g. 0,1,1,2,3,5,8... Find the 200th term of the sequence'
+    current_cls = 1
+    completion = 0
+    
     socket.emit 'online', online_data
-    socket.emit 'class', cls_data
+    socket.emit 'class', classData(current_cls)
 
     socket.broadcast.emit 'online', online_data
     io.of('/teacher').emit 'render', online_data
@@ -67,9 +84,11 @@ io.of('/student')
 
     socket.on 'set name', (name) ->
         socket.set 'nick', name
+        socket.emit 'sid', socket.id
         io.of('/teacher').emit 'render', onlineData()
+        io.of('/teacher').emit 'update', onlineData()
     socket.on 'edit', (data) ->
-        io.of('/teacher').emit 'update', {sid:socket.id, text:data.text}
+        io.of('/teacher').emit 'update', {sid:socket.id, text:data.text, completion:completion}
                 
     socket.on 'disconnect', (data) ->
         online = onlineData()
@@ -77,7 +96,11 @@ io.of('/student')
         onlineLessThis = {clients:online.clients-1, idNickPairs:nickPairsLessThis}
         io.of('/student').emit 'online',  onlineLessThis
         io.of('/teacher').emit 'render', onlineLessThis
-  
+    socket.on 'level up', (data) ->
+        completion = completion + 1
+        current_cls = current_cls + 1
+        socket.emit 'class', classData(current_cls)
+        io.of('/teacher').emit 'level up', {sid:socket.id, cmpl:completion}  
     
 
         

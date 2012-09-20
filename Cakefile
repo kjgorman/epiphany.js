@@ -22,7 +22,7 @@ build = (callback) ->
   options = ['-c','-b', '-o', 'app', 'src']
   cmd = which.sync 'coffee'
   coffee = spawn cmd, options
-  cofee = spawn cmd, ['-c', 'assets/js/']
+  #coffee = spawn cmd, ['-c', 'assets/js/']
   coffee.stdout.pipe process.stdout
   coffee.stderr.pipe process.stderr
   coffee.on 'exit', (status) -> callback?() if status is 0
