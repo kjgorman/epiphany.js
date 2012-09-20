@@ -45,6 +45,8 @@ getSocketById = (sid) ->
         clients = io.sockets.clients()
         client = null
         _.map clients, (c) -> client = c if c.id == sid
+        console.log "CLIENT SELECTED:"
+        console.log client
         client
 
 io.sockets.manager.settings.blacklist = []

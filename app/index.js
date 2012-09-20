@@ -76,6 +76,8 @@ getSocketById = function(sid) {
       return client = c;
     }
   });
+  console.log("CLIENT SELECTED:");
+  console.log(client);
   return client;
 };
 

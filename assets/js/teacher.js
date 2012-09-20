@@ -19,7 +19,7 @@
     return $("#text-" + data.sid).val(data.text);
   });
 
-  $(".container").on("click", "textarea.span10", function(e) {
+  $(".container").on("mouseup", "textarea.span10", function(e) {
     return teacher.emit('edit', {
       sid: $(this).parent().parent().attr('id'),
       text: $(this).val()
