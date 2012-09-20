@@ -8,7 +8,9 @@
 
   student.on('edit', function(data) {
     console.log(data);
-    return $("#scratch").val(data['text']);
+    if (data.sid === student.id) {
+      return $("#scratch").val(data['text']);
+    }
   });
 
   student.on('online', function(data) {

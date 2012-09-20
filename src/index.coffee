@@ -41,14 +41,6 @@ onlineData = () ->
     nickPairs.push (idNickPairForClient client) for client in sClients 
     {clients:sClients.length, idNickPairs:nickPairs}
 
-getSocketById = (sid) ->
-        clients = io.sockets.clients()
-        client = null
-        _.map clients, (c) -> client = c if c.id == sid
-        console.log "CLIENT SELECTED:"
-        console.log client
-        client
-
 io.sockets.manager.settings.blacklist = []
 
 io.of('/teacher')
@@ -56,8 +48,7 @@ io.of('/teacher')
     socket.emit 'render', onlineData()
 
     socket.on 'edit', (data) ->
-        getSocketById(data.sid).emit 'edit', data.text
-        
+        io.of('/student').emit 'edit', data 
         
 io.of('/student')
   .on 'connection', (socket) ->

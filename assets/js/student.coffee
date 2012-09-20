@@ -2,7 +2,8 @@ student = io.connect '/student', {'sync disconnect on unload' : true}
 
 student.on 'edit', (data) ->
     console.log data
-    $("#scratch").val data['text']
+    if data.sid == student.id
+            $("#scratch").val data['text']
 student.on 'online', (data) ->
     $("#online").text "Users connected: "+data.clients
 
