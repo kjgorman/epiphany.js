@@ -10,6 +10,10 @@ student.on 'online', (data) ->
 
 student.on 'class', (data) ->
     console.log data
+    console.log data.clsnum
+    console.log data.clstext
+    console.log $("#class-num").text()
+    console.log $("#class-text").text()
     $("#class-num").text(data.clsnum)
     $("#class-text").text(data.clstext)
 
