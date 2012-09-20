@@ -9,7 +9,7 @@ teacher.on 'update', (data) ->
     $("#text-"+data.sid).val(data.text)
 
 $(".container").on "mouseup", "textarea.span10", (e) ->
-        teacher.emit 'edit', {sid:$(this).parent().parent().attr('id'), text:$(this).val()}
+
 
 #At some point this will do something!           
 createProgress = () ->
@@ -53,11 +53,17 @@ teacher.on 'render', (data) ->
             .appendTo(current_row)
             .each () ->
                     nick = $(this).find "#nick-#{id}"
+                    textbox = $(this).find 'textarea'
                     ((closed_id, closed_nick) ->
                       $(nick).toggle () ->
                         $("#text-container-#{closed_id}").show("explode", 1000);
                       , () ->
                         $("#text-container-#{closed_id}").hide("explode", 1000);)(id, nick);
+                    ((closed_box) ->
+                      closed_box.mouseup () ->
+                        console.log "edit sending"
+                        teacher.emit 'edit', {sid:$(this).parent().parent().attr('id'), text:$(this).val(})
+                    )(textbox)
     #also, delete any ids that are still client side but have disconnected from the server
     _.map $('.container').find('.student-box'),
           (el) ->
