@@ -72,6 +72,7 @@ io.sockets.manager.settings.blacklist = [];
 io.of('/teacher').on('connection', function(socket) {
   socket.emit('render', onlineData());
   return socket.on('edit', function(data) {
+    console.log(data);
     return io.sockets.socket(data.sid).emit('edit', data.text);
   });
 });

@@ -7,11 +7,11 @@
   });
 
   student.on('edit', function(data) {
+    console.log(data);
     return $("#scratch").val(data['text']);
   });
 
   student.on('online', function(data) {
-    console.log(data);
     return $("#online").text("Users connected: " + data.clients);
   });
 
