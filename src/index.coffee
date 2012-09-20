@@ -44,7 +44,7 @@ onlineData = () ->
 getSocketById = (sid) ->
         clients = io.sockets.clients()
         client = null
-        _.map(clients, (c) -> console.log c.id+" "+sid+" "+(c.id == sid)
+        _.map(clients, (c) -> console.log c.id+" "+sid+" "+(c.id == sid))
 
 io.sockets.manager.settings.blacklist = []
 
