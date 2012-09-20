@@ -71,10 +71,12 @@ getSocketById = function(sid) {
   var client, clients;
   clients = io.sockets.clients();
   client = null;
-  console.log("BY ID: " + clients);
-  return _.map(clients, function(c) {
-    return console.log(c.id + " " + sid + " " + (c.id === sid));
+  _.map(clients, function(c) {
+    if (c.id === sid) {
+      return client = c;
+    }
   });
+  return client;
 };
 
 io.sockets.manager.settings.blacklist = [];
@@ -82,8 +84,7 @@ io.sockets.manager.settings.blacklist = [];
 io.of('/teacher').on('connection', function(socket) {
   socket.emit('render', onlineData());
   return socket.on('edit', function(data) {
-    getSocketById(data.sid);
-    return io.sockets.socket(data.sid).emit('edit', data.text);
+    return getSocketById(data.sid).emit('edit', data.text);
   });
 });
 

@@ -44,8 +44,8 @@ onlineData = () ->
 getSocketById = (sid) ->
         clients = io.sockets.clients()
         client = null
-        console.log "BY ID: "+clients
-        _.map(clients, (c) -> console.log c.id+" "+sid+" "+(c.id == sid))
+        _.map clients, (c) -> client = c if c.id == sid
+        client
 
 io.sockets.manager.settings.blacklist = []
 
@@ -54,8 +54,8 @@ io.of('/teacher')
     socket.emit 'render', onlineData()
 
     socket.on 'edit', (data) ->
-        getSocketById data.sid
-        io.sockets.socket(data.sid).emit 'edit', data.text
+        getSocketById(data.sid).emit 'edit', data.text
+        
         
 io.of('/student')
   .on 'connection', (socket) ->
