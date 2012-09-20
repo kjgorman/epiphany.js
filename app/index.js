@@ -74,8 +74,9 @@ io.of('/teacher').on('connection', function(socket) {
 });
 
 io.of('/student').on('connection', function(socket) {
-  var online_data;
+  var cls_data, online_data;
   online_data = onlineData();
+  cls_data = {};
   cls_data.clsnum = 1;
   cls_data.clstext = 'The Fibonacci sequence is formed by adding the preceding two terms to find the next,\
                          beginning with 0 and 1, e.g. 0,1,1,2,3,5,8... Find the 200th term of the sequence';
