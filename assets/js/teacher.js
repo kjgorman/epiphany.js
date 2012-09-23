@@ -15,8 +15,11 @@
   alert = function(sid) {
     var $stdnt;
     $stdnt = $("#" + sid);
+    console.log("hm");
     $stdnt.toggleClass("alert-on");
-    return $stdnt.toggleClass("alert-off");
+    console.log("hmm");
+    $stdnt.toggleClass("alert-off");
+    return console.log("hmmm");
   };
 
   teacher.on('connect', function(data) {

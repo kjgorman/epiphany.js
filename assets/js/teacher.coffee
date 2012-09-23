@@ -7,8 +7,11 @@ completeClass = (sid, cmpl) ->
 
 alert = (sid) ->
     $stdnt = $("#"+sid)
+    console.log "hm"
     $stdnt.toggleClass "alert-on"
+    console.log "hmm"
     $stdnt.toggleClass "alert-off"
+    console.log "hmmm"
         
 teacher.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
