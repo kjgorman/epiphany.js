@@ -7,15 +7,8 @@ completeClass = (sid, cmpl) ->
 
 alert = (sid) ->
     $stdnt = $("#"+sid)
-    if $stdnt.hasClass "alert-on"
-        console.log "fst"
-        $stdnt.removeClass "alert-on"
-        console.log "snd"
-        return $stdnt.addClass "alert-off"
-    console.log "ofst"
-    $stdnt.removeClass "alert-off"
-    console.log "osnd"
-    $stdnt.addClass "alert-on"
+    $stdnt.toggleClass "alert-on"
+    $stdnt.toggleClass "alert-off"
         
 teacher.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
@@ -27,6 +20,7 @@ teacher.on 'update', (data) ->
     $("#text-"+data.sid).val(data.text)
 
 teacher.on 'help', (data) ->
+    $("#"+data.sid).addClass "alert-on"
     alerts.sid = setInterval alert(data.sid), 1000
 
 teacher.on 'level up', (data) ->
