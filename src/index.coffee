@@ -88,15 +88,20 @@ io.of('/student')
         socket.emit 'sid', socket.id
         io.of('/teacher').emit 'render', onlineData()
         io.of('/teacher').emit 'update', onlineData()
+        
     socket.on 'edit', (data) ->
         io.of('/teacher').emit 'update', {sid:socket.id, text:data.text, completion:completion}
-                
+        
+    socket.on 'help', (sid) ->
+        io.of('/teacher').emit 'help', {sid:sid}
+        
     socket.on 'disconnect', (data) ->
         online = onlineData()
         nickPairsLessThis = _.filter online.idNickPairs, (o) -> o.id != socket.id
         onlineLessThis = {clients:online.clients-1, idNickPairs:nickPairsLessThis}
         io.of('/student').emit 'online',  onlineLessThis
         io.of('/teacher').emit 'render', onlineLessThis
+        
     socket.on 'level up', (data) ->
         completion = completion + 1
         current_cls = current_cls + 1

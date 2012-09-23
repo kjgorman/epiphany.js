@@ -123,6 +123,11 @@ io.of('/student').on('connection', function(socket) {
       completion: completion
     });
   });
+  socket.on('help', function(sid) {
+    return io.of('/teacher').emit('help', {
+      sid: sid
+    });
+  });
   socket.on('disconnect', function(data) {
     var nickPairsLessThis, online, onlineLessThis;
     online = onlineData();

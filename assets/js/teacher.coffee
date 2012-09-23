@@ -1,8 +1,19 @@
 teacher = io.connect '/teacher', {'sync disconnect on unload' : true}
 
+alerts = {}
+
 completeClass = (sid, cmpl) ->
     $(($("#"+sid).find(".lesson")).slice(0, cmpl)).removeClass("incomplete").addClass("complete")
 
+alert = (sid) ->
+    $stdnt = $("#"+sid)
+    if $stdnt.hasClass "alert-on"
+        $stdnt.removeClass "alert-on"
+        return $stdnt.addClass "alert-off"
+    else
+        $stdnt.removeClass "alert-off"
+        return $stdnt.addClass "alert-on"
+        
 teacher.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
         $(this).remove()
@@ -11,6 +22,9 @@ teacher.on 'update', (data) ->
     console.log data
     completeClass data.sid, data.completion
     $("#text-"+data.sid).val(data.text)
+
+teacher.on 'help', (sid) ->
+    alerts.sid = setInterval alert sid, 1000
 
 teacher.on 'level up', (data) ->
     console.log "level up received for #{data.sid}"
@@ -60,6 +74,10 @@ teacher.on 'render', (data) ->
                     textbox = $(this).find 'textarea'
                     ((closed_id, closed_nick) ->
                       $(nick).toggle () ->
+                        if $("#"+closed_id).hasClass "alert-on"
+                            $("#"+closed_id).removeClass "alert-on"
+                        if $("#"+closed_id).hasClass "alert-off"
+                            $("#"+closed_id).removeClass "alert-on"
                         $("#text-container-#{closed_id}").show("explode", 1000);
                       , () ->
                         $("#text-container-#{closed_id}").hide("explode", 1000);)(id, nick);

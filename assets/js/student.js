@@ -107,6 +107,10 @@
     return eval(data);
   });
 
+  $("#help").click(function(event) {
+    return student.emit('help', student.sid);
+  });
+
   applyCSS = function(elems, clr, bgclr, fnt) {
     return _.each(elems, function(elem) {
       return $(elem).css({

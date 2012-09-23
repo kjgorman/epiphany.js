@@ -78,6 +78,9 @@ $("#submit").click (event) ->
     data = $("#scratch").val()
     eval data
 
+$("#help").click (event) ->
+    student.emit 'help', student.sid
+
 applyCSS = (elems, clr, bgclr, fnt) ->
         _.each elems, (elem) -> $(elem).css({"color":clr, "background-color":bgclr, "font":fnt});
 
