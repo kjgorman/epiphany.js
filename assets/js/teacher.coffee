@@ -24,7 +24,7 @@ teacher.on 'update', (data) ->
 
 teacher.on 'help', (data) ->
     $("#"+data.sid).addClass "alert-on"
-    alerts.sid = setInterval() -> toggleAlert(data.sid), 1000
+    alerts.sid = setInterval (() -> toggleAlert(data.sid)), 1000
 
 teacher.on 'level up', (data) ->
     console.log "level up received for #{data.sid}"
