@@ -14,7 +14,6 @@
 
   alert = function(sid) {
     var $stdnt;
-    console.log("ALERT");
     $stdnt = $("#" + sid);
     if ($stdnt.hasClass("alert-on")) {
       $stdnt.removeClass("alert-on");
@@ -39,9 +38,8 @@
     return $("#text-" + data.sid).val(data.text);
   });
 
-  teacher.on('help', function(sid) {
-    console.log("received request for help from " + sid);
-    return alerts.sid = setInterval(alert(sid, 1000));
+  teacher.on('help', function(data) {
+    return alerts.sid = setInterval(alert(data.sid, 1000));
   });
 
   teacher.on('level up', function(data) {

@@ -6,7 +6,6 @@ completeClass = (sid, cmpl) ->
     $(($("#"+sid).find(".lesson")).slice(0, cmpl)).removeClass("incomplete").addClass("complete")
 
 alert = (sid) ->
-    console.log "ALERT"
     $stdnt = $("#"+sid)
     if $stdnt.hasClass "alert-on"
         $stdnt.removeClass "alert-on"
@@ -24,9 +23,8 @@ teacher.on 'update', (data) ->
     completeClass data.sid, data.completion
     $("#text-"+data.sid).val(data.text)
 
-teacher.on 'help', (sid) ->
-    console.log "received request for help from #{sid}"
-    alerts.sid = setInterval alert sid, 1000
+teacher.on 'help', (data) ->
+    alerts.sid = setInterval alert data.sid, 1000
 
 teacher.on 'level up', (data) ->
     console.log "level up received for #{data.sid}"
