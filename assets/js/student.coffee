@@ -16,6 +16,7 @@ student.on 'class', (data) ->
     console.log data
     $("#class-num").text(data.clsnum)
     $("#class-text").text(data.clstext)
+    $("#scratch").val(data.base)
     current_answer = data.clsans
 
 student.on 'connect', (data) ->
@@ -23,6 +24,15 @@ student.on 'connect', (data) ->
         $(this).remove()
     $("#scratch").attr('readonly', false)
     student.emit 'set name', 'user'
+
+student.on 'viewing', (data) ->
+    if data.sid == student.sid
+        if data.opened
+                viewBtn = $("<div class='viewing btn btn-info span3'>A Teacher is viewing your work</div>")
+                viewBtn.appendTo $("#btn-container")
+                viewBtn.show "explode", 500
+        if !data.opened
+                $(".viewing").hide 'explode', 500, () -> $(this).remove()
 
 $("#set-nick-btn").click () ->
     potenNick = $("#set-nick-input").val()
@@ -58,7 +68,7 @@ $('#scratch').keyup ->
       student.emit 'edit', {text:$(this).val()}
     else
       if !hasDollar
-          $(".alert-error").hide 'explode', 1000, () -> $(this).remove()
+          $(".alert-error").hide 'fold', 1000, () -> $(this).remove()
       
 
 output = (txt) ->
@@ -76,17 +86,22 @@ output = (txt) ->
 $("#submit").click (event) ->
     data = $("#scratch").val()
     eval data
+
+$("#help").click (event) ->
+    student.emit 'help', student.sid
+
+applyCSS = (elems, clr, bgclr, fnt) ->
+        _.each elems, (elem) -> $(elem).css({"color":clr, "background-color":bgclr, "font":fnt});
+
+elmts = [$('body'), $("input"), $(".well"), $("textarea")]
+
 $("#nerd").toggle (event) ->
-    $('body').css({"color":"#0F0", "background-color":"#000", "font":"console"})
-    $('#scratch').css({"color":"#0F0", "background-color":"#000", "font":"console"})
-    $('#console').css({"color":"#0F0", "background-color":"#000", "font":"console"})
-    $("#submit").addClass("btn-nerd-mode")
+    applyCSS elmts, "#0f0", "#000", "console"
+    $(".btn").addClass("btn-nerd-mode")
     $(this).text("normal mode")
 , (event) ->
-    $('body').css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
-    $('#scratch').css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
-    $('#console').css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
-    $("#submit").removeClass("btn-nerd-mode")
+    applyCSS elmts, "#000", "#fff", "helvetica"        
+    $(".btn").removeClass("btn-nerd-mode")
     $(this).text("nerd mode")
 
     

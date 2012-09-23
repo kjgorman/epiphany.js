@@ -64,9 +64,22 @@ div.btn-nerd-mode
   background-color #000
   border solid 1px #0f0
   color #0f0
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#000000), to(#000000));
+  background-image: -webkit-linear-gradient(top, #000000, #000000);
+  //background-image: -o-linear-gradient(top, #000000, #000000);
+  //background-image: linear-gradient(top bottom, #000000, #000000);
+  background-image: -moz-linear-gradient(top, #000000, #000000);
+  background-repeat: repeat-x;
+
+div.btn-nerd-mode:hover
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#000000), to(#000000));
+  background-image: -webkit-linear-gradient(top, #000000, #000000);
 
 div.class-text
   margin-top 40px
+
+div.alert-on
+  background-color #d9edf7
 
 div#set-nick
   position absolute

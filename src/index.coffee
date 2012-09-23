@@ -52,11 +52,12 @@ onlineData = () ->
 
 classData = (clsnum) ->
     if !cls[clsnum]
-        {}
+        {} #don't explode when there isn't a class left
     cls_data = {}
     cls_data.clsnum = clsnum
     cls_data.clstext = cls[clsnum].clstext
     cls_data.clsans = cls[clsnum].clsans
+    cls_data.base = cls[clsnum].base
     cls_data
 
 io.sockets.manager.settings.blacklist = []
@@ -66,7 +67,10 @@ io.of('/teacher')
     socket.emit 'render', onlineData()
 
     socket.on 'edit', (data) ->
-        io.of('/student').emit 'edit', data 
+        io.of('/student').emit 'edit', data
+
+    socket.on 'viewing', (data) ->
+        io.of('/student').emit 'viewing', data
         
 io.of('/student')
   .on 'connection', (socket) ->
@@ -87,15 +91,20 @@ io.of('/student')
         socket.emit 'sid', socket.id
         io.of('/teacher').emit 'render', onlineData()
         io.of('/teacher').emit 'update', onlineData()
+        
     socket.on 'edit', (data) ->
         io.of('/teacher').emit 'update', {sid:socket.id, text:data.text, completion:completion}
-                
+        
+    socket.on 'help', (sid) ->
+        io.of('/teacher').emit 'help', {sid:sid}
+        
     socket.on 'disconnect', (data) ->
         online = onlineData()
         nickPairsLessThis = _.filter online.idNickPairs, (o) -> o.id != socket.id
         onlineLessThis = {clients:online.clients-1, idNickPairs:nickPairsLessThis}
         io.of('/student').emit 'online',  onlineLessThis
         io.of('/teacher').emit 'render', onlineLessThis
+        
     socket.on 'level up', (data) ->
         completion = completion + 1
         current_cls = current_cls + 1

@@ -87,6 +87,7 @@ classData = function(clsnum) {
   cls_data.clsnum = clsnum;
   cls_data.clstext = cls[clsnum].clstext;
   cls_data.clsans = cls[clsnum].clsans;
+  cls_data.base = cls[clsnum].base;
   return cls_data;
 };
 
@@ -94,8 +95,11 @@ io.sockets.manager.settings.blacklist = [];
 
 io.of('/teacher').on('connection', function(socket) {
   socket.emit('render', onlineData());
-  return socket.on('edit', function(data) {
+  socket.on('edit', function(data) {
     return io.of('/student').emit('edit', data);
+  });
+  return socket.on('viewing', function(data) {
+    return io.of('/student').emit('viewing', data);
   });
 });
 
@@ -120,6 +124,11 @@ io.of('/student').on('connection', function(socket) {
       sid: socket.id,
       text: data.text,
       completion: completion
+    });
+  });
+  socket.on('help', function(sid) {
+    return io.of('/teacher').emit('help', {
+      sid: sid
     });
   });
   socket.on('disconnect', function(data) {

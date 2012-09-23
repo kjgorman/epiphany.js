@@ -1,8 +1,16 @@
 teacher = io.connect '/teacher', {'sync disconnect on unload' : true}
 
+alerts = {}
+
 completeClass = (sid, cmpl) ->
     $(($("#"+sid).find(".lesson")).slice(0, cmpl)).removeClass("incomplete").addClass("complete")
 
+toggleAlert = (sid) ->
+    $stdnt = $("#"+sid)
+    $stdnt.toggleClass "alert-on"
+    $stdnt.toggleClass "alert-off"
+    console.log "hmmm"
+        
 teacher.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
         $(this).remove()
@@ -11,6 +19,10 @@ teacher.on 'update', (data) ->
     console.log data
     completeClass data.sid, data.completion
     $("#text-"+data.sid).val(data.text)
+
+teacher.on 'help', (data) ->
+    $("#"+data.sid).addClass "alert-on"
+    alerts[data.sid] = setInterval (() -> toggleAlert(data.sid)), 1000
 
 teacher.on 'level up', (data) ->
     console.log "level up received for #{data.sid}"
@@ -58,16 +70,28 @@ teacher.on 'render', (data) ->
             .each () ->
                     nick = $(this).find "#nick-#{id}"
                     textbox = $(this).find 'textarea'
+                
                     ((closed_id, closed_nick) ->
                       $(nick).toggle () ->
-                        $("#text-container-#{closed_id}").show("explode", 1000);
+                        if $("#"+closed_id).hasClass "alert-on"
+                            $("#"+closed_id).removeClass "alert-on"
+                        if $("#"+closed_id).hasClass "alert-off"
+                            $("#"+closed_id).removeClass "alert-on"
+                        clearInterval alerts[closed_id] if alerts[closed_id]
+                        teacher.emit 'viewing', {sid:closed_id, opened:true}
+                        $("#text-container-#{closed_id}").show("blind", 1000);
+                        
                       , () ->
-                        $("#text-container-#{closed_id}").hide("explode", 1000);)(id, nick);
+                        teacher.emit 'viewing', {sid:closed_id, opened:false}                        
+                        $("#text-container-#{closed_id}").hide("blind", 1000);)(id, nick);
+
+                        
                     ((closed_box) ->
                       closed_box.keyup () ->
                         console.log "edit sending"
                         teacher.emit 'edit', {sid:$(this).parent().parent().attr('id'), text:$(this).val()}
                     )(textbox)
+                
     #also, delete any ids that are still client side but have disconnected from the server
     _.map $('.container').find('.student-box'),
           (el) ->
