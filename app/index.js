@@ -98,8 +98,8 @@ io.of('/teacher').on('connection', function(socket) {
   socket.on('edit', function(data) {
     return io.of('/student').emit('edit', data);
   });
-  return socket.on('viewing', function(sid) {
-    return io.of('/student').emit('viewing', sid);
+  return socket.on('viewing', function(data) {
+    return io.of('/student').emit('viewing', data);
   });
 });
 

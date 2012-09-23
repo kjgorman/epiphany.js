@@ -69,8 +69,8 @@ io.of('/teacher')
     socket.on 'edit', (data) ->
         io.of('/student').emit 'edit', data
 
-    socket.on 'viewing', (sid) ->
-        io.of('/student').emit 'viewing', sid
+    socket.on 'viewing', (data) ->
+        io.of('/student').emit 'viewing', data
         
 io.of('/student')
   .on 'connection', (socket) ->

@@ -25,11 +25,14 @@ student.on 'connect', (data) ->
     $("#scratch").attr('readonly', false)
     student.emit 'set name', 'user'
 
-student.on 'viewing', (sid) ->
-    if sid == student.sid
-        viewBtn = $("<div class='hide viewing btn btn-info'>A Teacher is viewing your work</div>")
-        viewBtn.appendTo $("#btn-container")
-        viewBtn.show "explode", 500
+student.on 'viewing', (data) ->
+    if data.sid == student.sid
+        if data.viewing
+                viewBtn = $("<div class='viewing btn btn-info span2'>A Teacher is viewing your work</div>")
+                viewBtn.appendTo $("#btn-container")
+                viewBtn.show "explode", 500
+        if !data.viewing
+                $(".viewing").hide 'explode', 500, () -> $(this).remove()
 
 $("#set-nick-btn").click () ->
     potenNick = $("#set-nick-input").val()

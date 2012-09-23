@@ -78,12 +78,13 @@ teacher.on 'render', (data) ->
                         if $("#"+closed_id).hasClass "alert-off"
                             $("#"+closed_id).removeClass "alert-on"
                         clearInterval alerts[closed_id] if alerts[closed_id]
-                        teacher.emit 'viewing', closed_id
+                        teacher.emit 'viewing', {sid:closed_id, opened:true}
                         $("#text-container-#{closed_id}").show("explode", 1000);
                         
                       , () ->
                         
                         $("#text-container-#{closed_id}").hide("explode", 1000);)(id, nick);
+                        teacher.emit 'viewing', {sid:closed_id, opened:false}
                         
                     ((closed_box) ->
                       closed_box.keyup () ->
