@@ -15,9 +15,7 @@
   toggleAlert = function(sid) {
     var $stdnt;
     $stdnt = $("#" + sid);
-    console.log("hm");
     $stdnt.toggleClass("alert-on");
-    console.log("hmm");
     $stdnt.toggleClass("alert-off");
     return console.log("hmmm");
   };
