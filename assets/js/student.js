@@ -41,12 +41,19 @@
     return student.emit('set name', 'user');
   });
 
-  student.on('viewing', function(sid) {
+  student.on('viewing', function(data) {
     var viewBtn;
-    if (sid === student.sid) {
-      viewBtn = $("<div class='hide viewing btn btn-info'>A Teacher is viewing your work</div>");
-      viewBtn.appendTo($("#btn-container"));
-      return viewBtn.show("explode", 500);
+    if (data.sid === student.sid) {
+      if (data.viewing) {
+        viewBtn = $("<div class='viewing btn btn-info span2'>A Teacher is viewing your work</div>");
+        viewBtn.appendTo($("#btn-container"));
+        viewBtn.show("explode", 500);
+      }
+      if (!data.viewing) {
+        return $(".viewing").hide('explode', 500, function() {
+          return $(this).remove();
+        });
+      }
     }
   });
 

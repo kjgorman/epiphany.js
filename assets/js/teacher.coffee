@@ -82,9 +82,9 @@ teacher.on 'render', (data) ->
                         $("#text-container-#{closed_id}").show("explode", 1000);
                         
                       , () ->
-                        
+                        teacher.emit 'viewing', {sid:closed_id, opened:false}                        
                         $("#text-container-#{closed_id}").hide("explode", 1000);)(id, nick);
-                        teacher.emit 'viewing', {sid:closed_id, opened:false}
+
                         
                     ((closed_box) ->
                       closed_box.keyup () ->
