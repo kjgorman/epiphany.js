@@ -36,7 +36,7 @@
 
   teacher.on('help', function(data) {
     $("#" + data.sid).addClass("alert-on");
-    return alerts.sid = setInterval((function() {
+    return alerts[data.sid] = setInterval((function() {
       return toggleAlert(data.sid);
     }), 1000);
   });
@@ -82,6 +82,9 @@
               }
               if ($("#" + closed_id).hasClass("alert-off")) {
                 $("#" + closed_id).removeClass("alert-on");
+              }
+              if (alerts[closed_id]) {
+                clearInterval(alerts[closed_id]);
               }
               return $("#text-container-" + closed_id).show("explode", 1000);
             }, function() {

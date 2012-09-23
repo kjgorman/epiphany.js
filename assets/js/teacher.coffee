@@ -22,7 +22,7 @@ teacher.on 'update', (data) ->
 
 teacher.on 'help', (data) ->
     $("#"+data.sid).addClass "alert-on"
-    alerts.sid = setInterval (() -> toggleAlert(data.sid)), 1000
+    alerts[data.sid] = setInterval (() -> toggleAlert(data.sid)), 1000
 
 teacher.on 'level up', (data) ->
     console.log "level up received for #{data.sid}"
@@ -76,6 +76,7 @@ teacher.on 'render', (data) ->
                             $("#"+closed_id).removeClass "alert-on"
                         if $("#"+closed_id).hasClass "alert-off"
                             $("#"+closed_id).removeClass "alert-on"
+                        clearInterval alerts[closed_id] if alerts[closed_id]
                         $("#text-container-#{closed_id}").show("explode", 1000);
                       , () ->
                         $("#text-container-#{closed_id}").hide("explode", 1000);)(id, nick);
