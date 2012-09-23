@@ -26,7 +26,7 @@ student.on 'connect', (data) ->
     student.emit 'set name', 'user'
 
 student.on 'viewing', (data) ->
-    console.log data.sid
+    console.log data
     console.log student.sid
     console.log student.sid == data.sid
     if data.sid == student.sid

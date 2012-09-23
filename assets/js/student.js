@@ -43,7 +43,7 @@
 
   student.on('viewing', function(data) {
     var viewBtn;
-    console.log(data.sid);
+    console.log(data);
     console.log(student.sid);
     console.log(student.sid === data.sid);
     if (data.sid === student.sid) {
