@@ -43,6 +43,9 @@
 
   student.on('viewing', function(data) {
     var viewBtn;
+    console.log(data.sid);
+    console.log(student.sid);
+    console.log(student.sid === data.sid);
     if (data.sid === student.sid) {
       viewBtn = $("<div class='hide viewing btn btn-info'>A Teacher is viewing your work</div>");
       viewBtn.appendTo($("#btn-container"));

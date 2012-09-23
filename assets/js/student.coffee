@@ -26,6 +26,9 @@ student.on 'connect', (data) ->
     student.emit 'set name', 'user'
 
 student.on 'viewing', (data) ->
+    console.log data.sid
+    console.log student.sid
+    console.log student.sid == data.sid
     if data.sid == student.sid
         viewBtn = $("<div class='hide viewing btn btn-info'>A Teacher is viewing your work</div>")
         viewBtn.appendTo $("#btn-container")
