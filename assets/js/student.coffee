@@ -83,11 +83,11 @@ applyCSS = (elems, clr, bgclr, fnt) ->
 
 $("#nerd").toggle (event) ->
     applyCSS [$('body'), $("#scratch"), $("#console"), $(".well")], "#0f0", "#000", "console"
-    $("#submit").addClass("btn-nerd-mode")
+    $(".btn").addClass("btn-nerd-mode")
     $(this).text("normal mode")
 , (event) ->
-    applyCSS [$('body'), $("#scratch"), $("#console"), $(".well")], "#fff", "#fff", "helvetica"        
-    $("#submit").removeClass("btn-nerd-mode")
+    applyCSS [$('body'), $("#scratch"), $("#console"), $(".well")], "#000", "#fff", "helvetica"        
+    $(".btn").removeClass("btn-nerd-mode")
     $(this).text("nerd mode")
 
     
