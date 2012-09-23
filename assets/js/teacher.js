@@ -39,7 +39,7 @@
   });
 
   teacher.on('help', function(data) {
-    return alerts.sid = setInterval(alert(data.sid, 1000));
+    return alerts.sid = setInterval(alert(data.sid), 1000);
   });
 
   teacher.on('level up', function(data) {

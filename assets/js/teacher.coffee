@@ -24,7 +24,7 @@ teacher.on 'update', (data) ->
     $("#text-"+data.sid).val(data.text)
 
 teacher.on 'help', (data) ->
-    alerts.sid = setInterval alert data.sid, 1000
+    alerts.sid = setInterval alert(data.sid), 1000
 
 teacher.on 'level up', (data) ->
     console.log "level up received for #{data.sid}"
