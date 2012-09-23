@@ -28,7 +28,7 @@ student.on 'connect', (data) ->
 student.on 'viewing', (data) ->
     if data.sid == student.sid
         if data.opened
-                viewBtn = $("<div class='viewing btn btn-info span2'>A Teacher is viewing your work</div>")
+                viewBtn = $("<div class='viewing btn btn-info span3'>A Teacher is viewing your work</div>")
                 viewBtn.appendTo $("#btn-container")
                 viewBtn.show "explode", 500
         if !data.opened
