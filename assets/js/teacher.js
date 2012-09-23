@@ -18,10 +18,9 @@
     if ($stdnt.hasClass("alert-on")) {
       $stdnt.removeClass("alert-on");
       return $stdnt.addClass("alert-off");
-    } else {
-      $stdnt.removeClass("alert-off");
-      return $stdnt.addClass("alert-on");
     }
+    $stdnt.removeClass("alert-off");
+    return $stdnt.addClass("alert-on");
   };
 
   teacher.on('connect', function(data) {
