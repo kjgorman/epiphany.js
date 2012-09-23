@@ -99,7 +99,7 @@
       });
     } else {
       if (!hasDollar) {
-        return $(".alert-error").hide('explode', 1000, function() {
+        return $(".alert-error").hide('fold', 1000, function() {
           return $(this).remove();
         });
       }

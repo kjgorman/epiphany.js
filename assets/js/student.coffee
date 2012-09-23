@@ -68,7 +68,7 @@ $('#scratch').keyup ->
       student.emit 'edit', {text:$(this).val()}
     else
       if !hasDollar
-          $(".alert-error").hide 'explode', 1000, () -> $(this).remove()
+          $(".alert-error").hide 'fold', 1000, () -> $(this).remove()
       
 
 output = (txt) ->
