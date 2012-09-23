@@ -41,12 +41,9 @@
     return student.emit('set name', 'user');
   });
 
-  student.on('viewing', function(data) {
+  student.on('viewing', function(sid) {
     var viewBtn;
-    console.log(data);
-    console.log(student.sid);
-    console.log(student.sid === data.sid);
-    if (data.sid === student.sid) {
+    if (sid === student.sid) {
       viewBtn = $("<div class='hide viewing btn btn-info'>A Teacher is viewing your work</div>");
       viewBtn.appendTo($("#btn-container"));
       return viewBtn.show("explode", 500);

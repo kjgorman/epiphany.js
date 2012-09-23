@@ -25,11 +25,8 @@ student.on 'connect', (data) ->
     $("#scratch").attr('readonly', false)
     student.emit 'set name', 'user'
 
-student.on 'viewing', (data) ->
-    console.log data
-    console.log student.sid
-    console.log student.sid == data.sid
-    if data.sid == student.sid
+student.on 'viewing', (sid) ->
+    if sid == student.sid
         viewBtn = $("<div class='hide viewing btn btn-info'>A Teacher is viewing your work</div>")
         viewBtn.appendTo $("#btn-container")
         viewBtn.show "explode", 500
