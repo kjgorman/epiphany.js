@@ -27,6 +27,7 @@
     console.log(data);
     $("#class-num").text(data.clsnum);
     $("#class-text").text(data.clstext);
+    $("#scratch").val(data.base);
     return current_answer = data.clsans;
   });
 

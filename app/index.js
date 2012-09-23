@@ -87,6 +87,7 @@ classData = function(clsnum) {
   cls_data.clsnum = clsnum;
   cls_data.clstext = cls[clsnum].clstext;
   cls_data.clsans = cls[clsnum].clsans;
+  cls_data.base = cls[clsnum].base;
   return cls_data;
 };
 

@@ -16,6 +16,7 @@ student.on 'class', (data) ->
     console.log data
     $("#class-num").text(data.clsnum)
     $("#class-text").text(data.clstext)
+    $("#scratch").val(data.base)
     current_answer = data.clsans
 
 student.on 'connect', (data) ->

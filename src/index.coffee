@@ -52,11 +52,12 @@ onlineData = () ->
 
 classData = (clsnum) ->
     if !cls[clsnum]
-        {}
+        {} #don't explode when there isn't a class left
     cls_data = {}
     cls_data.clsnum = clsnum
     cls_data.clstext = cls[clsnum].clstext
     cls_data.clsans = cls[clsnum].clsans
+    cls_data.base = cls[clsnum].base
     cls_data
 
 io.sockets.manager.settings.blacklist = []
