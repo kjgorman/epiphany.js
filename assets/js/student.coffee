@@ -77,16 +77,16 @@ output = (txt) ->
 $("#submit").click (event) ->
     data = $("#scratch").val()
     eval data
+
+applyCSS = (elems, clr, bgclr, fnt) ->
+        _.each elems, (elem) -> $(elem).css({"color":clr, "background-color":bgclr, "font":fnt});
+
 $("#nerd").toggle (event) ->
-    $('body').css({"color":"#0F0", "background-color":"#000", "font":"console"})
-    $('#scratch').css({"color":"#0F0", "background-color":"#000", "font":"console"})
-    $('#console').css({"color":"#0F0", "background-color":"#000", "font":"console"})
+    applyCSS [$('body'), $("#scratch"), $("#console"), $(".well")], "#0f0", "#000", "console"
     $("#submit").addClass("btn-nerd-mode")
     $(this).text("normal mode")
 , (event) ->
-    $('body').css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
-    $('#scratch').css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
-    $('#console').css({"color":"#000", "background-color":"#fff", "font":"helvetica"})
+    applyCSS [$('body'), $("#scratch"), $("#console"), $(".well")], "#fff", "#fff", "helvetica"        
     $("#submit").removeClass("btn-nerd-mode")
     $(this).text("nerd mode")
 
