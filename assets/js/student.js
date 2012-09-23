@@ -118,11 +118,11 @@
   };
 
   $("#nerd").toggle(function(event) {
-    applyCSS([$('body'), $("#scratch"), $("#console"), $(".well")], "#0f0", "#000", "console");
+    applyCSS([$('body'), $("input"), $(".well")], "#0f0", "#000", "console");
     $(".btn").addClass("btn-nerd-mode");
     return $(this).text("normal mode");
   }, function(event) {
-    applyCSS([$('body'), $("#scratch"), $("#console"), $(".well")], "#000", "#fff", "helvetica");
+    applyCSS([$('body'), $("input"), $(".well")], "#000", "#fff", "helvetica");
     $(".btn").removeClass("btn-nerd-mode");
     return $(this).text("nerd mode");
   });
