@@ -90,13 +90,13 @@
                 sid: closed_id,
                 opened: true
               });
-              return $("#text-container-" + closed_id).show("fold", 1000);
+              return $("#text-container-" + closed_id).show("blind", 1000);
             }, function() {
               teacher.emit('viewing', {
                 sid: closed_id,
                 opened: false
               });
-              return $("#text-container-" + closed_id).hide("fold", 1000);
+              return $("#text-container-" + closed_id).hide("blind", 1000);
             });
           })(id, nick);
           return (function(closed_box) {
