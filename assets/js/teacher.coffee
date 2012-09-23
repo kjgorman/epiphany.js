@@ -70,6 +70,7 @@ teacher.on 'render', (data) ->
             .each () ->
                     nick = $(this).find "#nick-#{id}"
                     textbox = $(this).find 'textarea'
+                
                     ((closed_id, closed_nick) ->
                       $(nick).toggle () ->
                         if $("#"+closed_id).hasClass "alert-on"
@@ -77,14 +78,19 @@ teacher.on 'render', (data) ->
                         if $("#"+closed_id).hasClass "alert-off"
                             $("#"+closed_id).removeClass "alert-on"
                         clearInterval alerts[closed_id] if alerts[closed_id]
+                        teacher.emit 'viewing', closed_id
                         $("#text-container-#{closed_id}").show("explode", 1000);
+                        
                       , () ->
+                        
                         $("#text-container-#{closed_id}").hide("explode", 1000);)(id, nick);
+                        
                     ((closed_box) ->
                       closed_box.keyup () ->
                         console.log "edit sending"
                         teacher.emit 'edit', {sid:$(this).parent().parent().attr('id'), text:$(this).val()}
                     )(textbox)
+                
     #also, delete any ids that are still client side but have disconnected from the server
     _.map $('.container').find('.student-box'),
           (el) ->

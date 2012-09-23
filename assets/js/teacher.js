@@ -86,6 +86,7 @@
               if (alerts[closed_id]) {
                 clearInterval(alerts[closed_id]);
               }
+              teacher.emit('viewing', closed_id);
               return $("#text-container-" + closed_id).show("explode", 1000);
             }, function() {
               return $("#text-container-" + closed_id).hide("explode", 1000);

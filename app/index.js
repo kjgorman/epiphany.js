@@ -95,8 +95,11 @@ io.sockets.manager.settings.blacklist = [];
 
 io.of('/teacher').on('connection', function(socket) {
   socket.emit('render', onlineData());
-  return socket.on('edit', function(data) {
+  socket.on('edit', function(data) {
     return io.of('/student').emit('edit', data);
+  });
+  return socket.on('viewing', function(sid) {
+    return io.of('/student').emit('viewing', sid);
   });
 });
 

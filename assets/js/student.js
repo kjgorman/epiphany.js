@@ -41,6 +41,15 @@
     return student.emit('set name', 'user');
   });
 
+  student.on('viewing', function(data) {
+    var viewBtn;
+    if (data.sid === student.sid) {
+      viewBtn = $("<div class='hide viewing btn btn-info'>A Teacher is viewing your work</div>");
+      viewBtn.appendTo($("#btn-container"));
+      return viewBtn.show("explode", 500);
+    }
+  });
+
   $("#set-nick-btn").click(function() {
     var potenNick;
     potenNick = $("#set-nick-input").val();

@@ -67,7 +67,10 @@ io.of('/teacher')
     socket.emit 'render', onlineData()
 
     socket.on 'edit', (data) ->
-        io.of('/student').emit 'edit', data 
+        io.of('/student').emit 'edit', data
+
+    socket.on 'viewing', (sid) ->
+        io.of('/student').emit 'viewing', sid
         
 io.of('/student')
   .on 'connection', (socket) ->
