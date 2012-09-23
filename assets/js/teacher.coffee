@@ -8,9 +8,13 @@ completeClass = (sid, cmpl) ->
 alert = (sid) ->
     $stdnt = $("#"+sid)
     if $stdnt.hasClass "alert-on"
+        console.log "fst"
         $stdnt.removeClass "alert-on"
+        console.log "snd"
         return $stdnt.addClass "alert-off"
+    console.log "ofst"
     $stdnt.removeClass "alert-off"
+    console.log "osnd"
     $stdnt.addClass "alert-on"
         
 teacher.on 'connect', (data) ->
