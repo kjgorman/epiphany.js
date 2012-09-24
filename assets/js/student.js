@@ -12,7 +12,7 @@
 
   worldCounter = 0;
 
-  welcomeRotation = setInterval(welcomeInterval(), 1000);
+  welcomeRotation = setInterval(welcomeInterval, 1000);
 
   welcomeInterval = function() {
     $("#welcome-text").fadeOut(1000, function() {
