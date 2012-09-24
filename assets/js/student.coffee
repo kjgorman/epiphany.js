@@ -8,7 +8,7 @@ welcomeRotation = setInterval (() ->
                                   $("#welcome-text").fadeOut(1000, () ->
                                     $("#welcome-text").text(worlds[worldCounter%worlds.length])
                                     $("#welcome-text").fadeIn(1000))
-                                  worldCounter++), 1000                               
+                                  worldCounter++), 2000                               
 
                      
 

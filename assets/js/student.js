@@ -18,7 +18,7 @@
       return $("#welcome-text").fadeIn(1000);
     });
     return worldCounter++;
-  }), 1000);
+  }), 2000);
 
   student.on('edit', function(data) {
     if (data.sid === student.sid) {
