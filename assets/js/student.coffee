@@ -2,11 +2,12 @@ student = io.connect '/student', {'sync disconnect on unload' : true}
 
 current_answer = -1
 
-worlds = ['world', 'monde', 'mundo', 'mondo', 'welt', 'wereld', 'verden', 'bote']
+worlds = ['world', 'monde', 'mundo', 'mondo', 'welt', 'wereld', 'verden', 'bote', 'mon', 'swiat', 'svet', 'byd']
 worldCounter = 0;
 welcomeRotation = setInterval (() ->
                                   $("#welcome-text").fadeOut(1000, () ->
-                                    $("#welcome-text").text(worlds[worldCounter++%worlds.length])
+                                    worldCounter = worldCounter + 1
+                                    $("#welcome-text").text(worlds[worldCounter%worlds.length])
                                     $("#welcome-text").fadeIn(1000))
                                   ), 1000                               
 

@@ -8,13 +8,14 @@
 
   current_answer = -1;
 
-  worlds = ['world', 'monde', 'mundo', 'mondo', 'welt', 'wereld', 'verden', 'bote'];
+  worlds = ['world', 'monde', 'mundo', 'mondo', 'welt', 'wereld', 'verden', 'bote', 'mon', 'swiat', 'svet', 'byd'];
 
   worldCounter = 0;
 
   welcomeRotation = setInterval((function() {
     return $("#welcome-text").fadeOut(1000, function() {
-      $("#welcome-text").text(worlds[worldCounter++ % worlds.length]);
+      worldCounter = worldCounter + 1;
+      $("#welcome-text").text(worlds[worldCounter % worlds.length]);
       return $("#welcome-text").fadeIn(1000);
     });
   }), 1000);
