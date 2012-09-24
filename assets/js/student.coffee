@@ -44,11 +44,15 @@ student.on 'viewing', (data) ->
         if !data.opened
                 $(".viewing").hide 'explode', 500, () -> $(this).remove()
 
+$("#show-nick").click () ->
+    $("#set-nick").show('blind');
+
 $("#set-nick-btn").click () ->
     potenNick = $("#set-nick-input").val()
     if potenNick != ""
         student.emit 'set name', potenNick
-        $("#show-nick").text("Hi, #{potenNick}!") 
+        $("#show-nick").text("Hi, #{potenNick}!")
+    $("#set-nick").hide('blind')
 
 $("#scratch").keydown (e) -> 
     if e.keyCode == 9

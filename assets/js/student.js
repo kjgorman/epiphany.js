@@ -69,13 +69,18 @@
     }
   });
 
+  $("#show-nick").click(function() {
+    return $("#set-nick").show('blind');
+  });
+
   $("#set-nick-btn").click(function() {
     var potenNick;
     potenNick = $("#set-nick-input").val();
     if (potenNick !== "") {
       student.emit('set name', potenNick);
-      return $("#show-nick").text("Hi, " + potenNick + "!");
+      $("#show-nick").text("Hi, " + potenNick + "!");
     }
+    return $("#set-nick").hide('blind');
   });
 
   $("#scratch").keydown(function(e) {
