@@ -110,7 +110,10 @@ output = (txt) ->
 
 $("#submit").click (event) ->
     data = $("#scratch").val()
-    eval data
+    try
+        eval data
+    catch err
+        output err.message
 
 $("#help").click (event) ->
     student.emit 'help', student.sid

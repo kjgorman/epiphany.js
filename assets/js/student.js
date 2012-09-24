@@ -153,7 +153,11 @@
   $("#submit").click(function(event) {
     var data;
     data = $("#scratch").val();
-    return eval(data);
+    try {
+      return eval(data);
+    } catch (err) {
+      return output(err.message);
+    }
   });
 
   $("#help").click(function(event) {
