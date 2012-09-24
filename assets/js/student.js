@@ -81,11 +81,11 @@
         $("#set-nick").animate({
           top: "35px",
           left: "100px"
-        });
+        }, 2000);
         return $("#show-nick").animate({
           top: "15px",
           left: "100px"
-        }, function() {
+        }, 2000, function() {
           return $(".container").fadeIn(1500);
         });
       });
