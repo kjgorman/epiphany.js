@@ -9,7 +9,6 @@ toggleAlert = (sid) ->
     $stdnt = $("#"+sid)
     $stdnt.toggleClass "alert-on"
     $stdnt.toggleClass "alert-off"
-    console.log "hmmm"
         
 teacher.on 'connect', (data) ->
     $("#connecting").animate {color:'#FFFFFF'}, 1000, () ->
@@ -22,7 +21,8 @@ teacher.on 'update', (data) ->
 
 teacher.on 'help', (data) ->
     $("#"+data.sid).addClass "alert-on"
-    alerts[data.sid] = setInterval (() -> toggleAlert(data.sid)), 1000
+    if !alerts[data.sid]
+        alerts[data.sid] = setInterval (() -> toggleAlert(data.sid)), 500
 
 teacher.on 'level up', (data) ->
     console.log "level up received for #{data.sid}"

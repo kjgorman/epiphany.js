@@ -16,8 +16,7 @@
     var $stdnt;
     $stdnt = $("#" + sid);
     $stdnt.toggleClass("alert-on");
-    $stdnt.toggleClass("alert-off");
-    return console.log("hmmm");
+    return $stdnt.toggleClass("alert-off");
   };
 
   teacher.on('connect', function(data) {
@@ -36,9 +35,11 @@
 
   teacher.on('help', function(data) {
     $("#" + data.sid).addClass("alert-on");
-    return alerts[data.sid] = setInterval((function() {
-      return toggleAlert(data.sid);
-    }), 1000);
+    if (!alerts[data.sid]) {
+      return alerts[data.sid] = setInterval((function() {
+        return toggleAlert(data.sid);
+      }), 500);
+    }
   });
 
   teacher.on('level up', function(data) {
