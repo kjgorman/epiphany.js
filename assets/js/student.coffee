@@ -52,8 +52,8 @@ $("#set-nick-btn").click () ->
     if potenNick != ""
         
         $("#set-nick").hide('blind', () ->                
-          $("#set-nick").animate({top:"35px", left:"100px"}, 2000)
-          $("#show-nick").animate({top:"15px", left:"100px"}, 2000, () ->        
+          $("#set-nick").animate({top:"3%", left:"10%"}, 2000)
+          $("#show-nick").animate({top:"2%", left:"10%"}, 2000, () ->        
             $(".container").fadeIn(1500)
           )
         )

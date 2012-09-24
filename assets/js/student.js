@@ -79,12 +79,12 @@
     if (potenNick !== "") {
       $("#set-nick").hide('blind', function() {
         $("#set-nick").animate({
-          top: "35px",
-          left: "100px"
+          top: "3%",
+          left: "10%"
         }, 2000);
         return $("#show-nick").animate({
-          top: "15px",
-          left: "100px"
+          top: "2%",
+          left: "10%"
         }, 2000, function() {
           return $(".container").fadeIn(1500);
         });
