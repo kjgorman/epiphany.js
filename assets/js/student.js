@@ -79,7 +79,7 @@
     if (potenNick !== "") {
       $("#set-nick").hide('blind', function() {
         $("#set-nick").animate({
-          top: "3%",
+          top: "4%",
           left: "10%"
         }, 2000);
         return $("#show-nick").animate({

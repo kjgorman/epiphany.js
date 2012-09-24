@@ -52,7 +52,7 @@ $("#set-nick-btn").click () ->
     if potenNick != ""
         
         $("#set-nick").hide('blind', () ->                
-          $("#set-nick").animate({top:"3%", left:"10%"}, 2000)
+          $("#set-nick").animate({top:"4%", left:"10%"}, 2000)
           $("#show-nick").animate({top:"2%", left:"10%"}, 2000, () ->        
             $(".container").fadeIn(1500)
           )
