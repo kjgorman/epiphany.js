@@ -4,12 +4,13 @@ current_answer = -1
 
 worlds = ['world', 'monde', 'mundo', 'mondo', 'welt', 'wereld', 'verden', 'bote', 'mon', 'swiat', 'svet', 'byd']
 worldCounter = 0;
-welcomeRotation = setInterval (welcomeInterval), 1000                               
-welcomeInterval = () ->
-                      $("#welcome-text").fadeOut(1000, () ->
-                         $("#welcome-text").text(worlds[worldCounter%worlds.length])
-                         $("#welcome-text").fadeIn(1000))
-                      worldCounter++
+welcomeRotation = setInterval (() ->
+                                  $("#welcome-text").fadeOut(1000, () ->
+                                    $("#welcome-text").text(worlds[worldCounter%worlds.length])
+                                    $("#welcome-text").fadeIn(1000))
+                                  worldCounter++), 1000                               
+
+                     
 
 student.on 'edit', (data) ->
     if data.sid == student.sid
