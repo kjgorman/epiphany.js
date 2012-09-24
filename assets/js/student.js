@@ -13,9 +13,10 @@
   worldCounter = 0;
 
   welcomeRotation = setInterval((function() {
-    $("#welcome-text").fadeOut();
-    $("#welcome-text").text(worlds[worldCounter++ % worlds.length]);
-    return $("#welcome-text").fadeIn();
+    return $("#welcome-text").fadeOut(1000, function() {
+      $("#welcome-text").text(worlds[worldCounter++ % worlds.length]);
+      return $("#welcome-text").fadeIn(1000);
+    });
   }), 1000);
 
   student.on('edit', function(data) {

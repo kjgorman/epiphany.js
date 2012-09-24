@@ -5,9 +5,10 @@ current_answer = -1
 worlds = ['world', 'monde', 'mundo', 'mondo', 'welt', 'wereld', 'verden', 'bote']
 worldCounter = 0;
 welcomeRotation = setInterval (() ->
-                                  $("#welcome-text").fadeOut()
-                                  $("#welcome-text").text(worlds[worldCounter++%worlds.length])
-                                  $("#welcome-text").fadeIn()), 1000                               
+                                  $("#welcome-text").fadeOut(1000, () ->
+                                    $("#welcome-text").text(worlds[worldCounter++%worlds.length])
+                                    $("#welcome-text").fadeIn(1000))
+                                  ), 1000                               
 
 
 student.on 'edit', (data) ->
