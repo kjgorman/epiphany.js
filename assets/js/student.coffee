@@ -4,7 +4,10 @@ current_answer = -1
 
 worlds = ['world', 'monde', 'mundo', 'mondo', 'welt', 'wereld', 'verden', 'bote', 'mon', 'swiat', 'svet', 'byd']
 worldCounter = 0;
-welcomeRotation = setInterval (() ->
+welcomeRotation = 0
+
+$("#show-nick").fadeIn(1500, () ->
+                                setInterval (() ->
                                   $("#welcome-text").fadeOut(1000, () ->
                                     $("#welcome-text").text(worlds[worldCounter%worlds.length])
                                     $("#welcome-text").fadeIn(1000))
