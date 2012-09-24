@@ -77,10 +77,22 @@
     var potenNick;
     potenNick = $("#set-nick-input").val();
     if (potenNick !== "") {
+      $("#set-nick").hide('blind', function() {
+        $("#set-nick").animate({
+          top: "35px",
+          left: "100px"
+        });
+        return $("#show-nick").animate({
+          top: "15px",
+          left: "100px"
+        }, function() {
+          return $(".container").fadeIn(1500);
+        });
+      });
       student.emit('set name', potenNick);
       $("#show-nick").text("Hi, " + potenNick + "!");
+      return clearInterval(welcomeRotation);
     }
-    return $("#set-nick").hide('blind');
   });
 
   $("#scratch").keydown(function(e) {

@@ -50,9 +50,13 @@ $("#show-nick").click () ->
 $("#set-nick-btn").click () ->
     potenNick = $("#set-nick-input").val()
     if potenNick != ""
+        $("#set-nick").hide('blind', () ->
+          $("#set-nick").animate({top:"35px", left:"100px"})
+          $("#show-nick").animate({top:"15px", left:"100px"}, () ->
+            $(".container").fadeIn(1500)))
         student.emit 'set name', potenNick
         $("#show-nick").text("Hi, #{potenNick}!")
-    $("#set-nick").hide('blind')
+        clearInterval welcomeRotation
 
 $("#scratch").keydown (e) -> 
     if e.keyCode == 9
