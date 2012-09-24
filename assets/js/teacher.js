@@ -87,6 +87,7 @@
               if (alerts[closed_id]) {
                 clearInterval(alerts[closed_id]);
               }
+              alerts.splice(alerts.indexOf(closed_id), 1);
               teacher.emit('viewing', {
                 sid: closed_id,
                 opened: true

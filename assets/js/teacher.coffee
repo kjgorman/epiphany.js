@@ -78,6 +78,7 @@ teacher.on 'render', (data) ->
                         if $("#"+closed_id).hasClass "alert-off"
                             $("#"+closed_id).removeClass "alert-on"
                         clearInterval alerts[closed_id] if alerts[closed_id]
+                        alerts.splice(alerts.indexOf(closed_id), 1)
                         teacher.emit 'viewing', {sid:closed_id, opened:true}
                         $("#text-container-#{closed_id}").show("blind", 1000);
                         
