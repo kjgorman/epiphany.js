@@ -13,8 +13,7 @@ $("#show-nick").fadeIn(750, () ->
                                     $("#welcome-text").fadeIn(1000))
                                   worldCounter++), 2000)                               
 $("#set-nick-input").keypress (e) ->
-        console.log e.keycode
-        if e.keycode == 13
+        if e.keyCode == 13
                 getNickInput()
 
 setupProgressBar = () ->

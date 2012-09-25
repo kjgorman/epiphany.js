@@ -25,8 +25,7 @@
   });
 
   $("#set-nick-input").keypress(function(e) {
-    console.log(e.keycode);
-    if (e.keycode === 13) {
+    if (e.keyCode === 13) {
       return getNickInput();
     }
   });
