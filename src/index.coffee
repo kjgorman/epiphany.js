@@ -70,8 +70,8 @@ io.of('/contribute')
         socket.on 'class-up', (cls) ->
                 console.log cls
                 fs.writeFile 'class.json', "("+cls+")", (err) ->
-                        console.log 'written'
                         console.log err if err
+                        console.log 'written' if not err
 io.of('/teacher')
   .on 'connection', (socket) ->
     socket.emit 'render', onlineData()

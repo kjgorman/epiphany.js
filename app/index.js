@@ -102,9 +102,11 @@ io.of('/contribute').on('connection', function(socket) {
   return socket.on('class-up', function(cls) {
     console.log(cls);
     return fs.writeFile('class.json', "(" + cls + ")", function(err) {
-      console.log('written');
       if (err) {
-        return console.log(err);
+        console.log(err);
+      }
+      if (!err) {
+        return console.log('written');
       }
     });
   });
