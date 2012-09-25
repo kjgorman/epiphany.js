@@ -39,10 +39,8 @@ student.on 'online', (data) ->
 
 student.on 'sid', (sid) ->
     student.sid = sid
-    console.log student.sid
 
 student.on 'class', (data) ->
-    console.log data
     $("#class-num").text(data.clsnum)
     $("#class-text").text(data.clstext)
     $("#scratch").val(data.base)
@@ -75,6 +73,7 @@ getNickInput = () ->
                   $("#show-nick").animate({top:"2%", left:"10%"}, 2000, () ->        
                     $(".container").fadeIn(1500, () ->
                       incrProgress = setupProgressBar()
+                      console.log incrProgress
                     )
                   )
                 )
@@ -110,7 +109,6 @@ $('#scratch').keyup ->
       if hasDollar
           dollarCharacterConsideredHarmful()
           return
-      console.log "emitting an edit"
       student.emit 'edit', {text:$(this).val()}
     else
       if !hasDollar
@@ -123,7 +121,7 @@ output = (txt) ->
                            <div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button></div>
                            <div class='modal-body'><h1>Well done, that's correct!</h1></div>
                            <div class='modal-footer centered'><a href='#' class='btn btn-large btn-success' data-dismiss='modal'>Next Lesson</a></div>
-                          </div>").modal().on('hidden', () -> incrProgress())
+                          </div>").modal().on('hidden', () -> console.log("level up!");incrProgress())
         student.emit 'level up'
     $cnsl = $("#console")        
     $cnsl.val $cnsl.val()+txt+"\n>> " 
