@@ -26,11 +26,13 @@
 
   classText = $("#class-text");
 
-  progressCanvas = Raphael(300, 200, 400, 20);
+  progressCanvas = Raphael(classText.offset().left, classText.offset().top, 800, 20);
 
   progressBar = progressCanvas.rect(0, 0, 400, 20, 5);
 
   progressBar.attr('fill', '#D33');
+
+  progressBar.attr('stroke', '#FFF');
 
   student.on('edit', function(data) {
     if (data.sid === student.sid) {
