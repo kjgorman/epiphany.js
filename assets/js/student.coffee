@@ -1,4 +1,5 @@
-student = io.connect '/student', {'sync disconnect on unload' : true}
+
+0;115;0cstudent = io.connect '/student', {'sync disconnect on unload' : true}
 
 current_answer = -1
 
@@ -14,9 +15,10 @@ $("#show-nick").fadeIn(750, () ->
                                   worldCounter++), 2000)                               
 
 classText =  $("#class-text")
-progressCanvas = Raphael(300, 200, 400, 20)
+progressCanvas = Raphael(500, 100, 800, 20)
 progressBar = progressCanvas.rect(0,0, 400, 20, 5)
 progressBar.attr('fill', '#D33')
+progressBar.attr('stroke', '#FFF')
 
 student.on 'edit', (data) ->
     if data.sid == student.sid
