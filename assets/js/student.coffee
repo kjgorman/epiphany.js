@@ -25,14 +25,14 @@ setupProgressBar = () ->
         progressBar.attr('stroke', '#FFF')
         progressProgress = 0
         progressProgressIncrement = classText.parent().width()/10
-        progressProgressBar = progressCanvas.rect(0,0,progressProgress,20,5);
-        progressProgressBar.attr('fill', '#3G3')
-        progressProgressBar.attr('stroke', '#D33')
+        progressProgressBar = progressCanvas.rect(0,0,progressProgress,20,5)
+                                            .attr('fill', '#3G3')
+                                            .attr('stroke', '#D33')
         
         return () ->
-                console.log progressProgressBar.attr('width')
-                console.log progressProgressBar.attr('width')+progressProgressIncrement
-                progressProgressBar.animate(Raphael.animation({width:progressProgressBar.attr('width')+progressProgressIncrement}, 2000, "backOut"))
+                progress = Raphael.animation({width:progressProgressBar.attr('width')+progressProgressIncrement}, 2000, "backOut")
+                progressProgressBar.animate(progress)
+                progressProgressBar.attr('width', progressProgressBar.attr('width')+progressProgressIncrement)
 
 student.on 'edit', (data) ->
     if data.sid == student.sid

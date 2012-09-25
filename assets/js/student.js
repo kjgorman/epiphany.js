@@ -41,15 +41,14 @@
     progressBar.attr('stroke', '#FFF');
     progressProgress = 0;
     progressProgressIncrement = classText.parent().width() / 10;
-    progressProgressBar = progressCanvas.rect(0, 0, progressProgress, 20, 5);
-    progressProgressBar.attr('fill', '#3G3');
-    progressProgressBar.attr('stroke', '#D33');
+    progressProgressBar = progressCanvas.rect(0, 0, progressProgress, 20, 5).attr('fill', '#3G3').attr('stroke', '#D33');
     return function() {
-      console.log(progressProgressBar.attr('width'));
-      console.log(progressProgressBar.attr('width') + progressProgressIncrement);
-      return progressProgressBar.animate(Raphael.animation({
+      var progress;
+      progress = Raphael.animation({
         width: progressProgressBar.attr('width') + progressProgressIncrement
-      }, 2000, "backOut"));
+      }, 2000, "backOut");
+      progressProgressBar.animate(progress);
+      return progressProgressBar.attr('width', progressProgressBar.attr('width') + progressProgressIncrement);
     };
   };
 
