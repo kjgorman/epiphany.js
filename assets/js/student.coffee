@@ -13,7 +13,10 @@ $("#show-nick").fadeIn(750, () ->
                                     $("#welcome-text").fadeIn(1000))
                                   worldCounter++), 2000)                               
 
-                     
+classText =  $("#class-text")
+progressCanvas = Raphael(classText.offset().left, classText.offset().top-20, classText.width(), 20)
+progressBar = progressCanvas.rect(0,0,classText.width(), 20, 5)
+progressBar.attr('fill', '#D33')
 
 student.on 'edit', (data) ->
     if data.sid == student.sid
