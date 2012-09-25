@@ -13,12 +13,13 @@ $("#show-nick").fadeIn(750, () ->
                                     $("#welcome-text").fadeIn(1000))
                                   worldCounter++), 2000)                               
 $("#set-nick-input").keypress (e) ->
+        console.log e.keycode
         if e.keycode == 13
                 getNickInput()
 
 setupProgressBar = () ->
         classText =  $("#class-text")
-        progressCanvas = Raphael(classText.offset().left, classText.offset().top, classText.width(), 20)
+        progressCanvas = Raphael(classText.offset().left, classText.offset().top, classText.parent().width(), 20)
         progressBar = progressCanvas.rect(0,0, classText.parent().width(), 20, 5)
         progressBar.attr('fill', '#D33')
         progressBar.attr('stroke', '#FFF')

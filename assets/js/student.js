@@ -25,6 +25,7 @@
   });
 
   $("#set-nick-input").keypress(function(e) {
+    console.log(e.keycode);
     if (e.keycode === 13) {
       return getNickInput();
     }
@@ -33,7 +34,7 @@
   setupProgressBar = function() {
     var classText, progressBar, progressCanvas;
     classText = $("#class-text");
-    progressCanvas = Raphael(classText.offset().left, classText.offset().top, classText.width(), 20);
+    progressCanvas = Raphael(classText.offset().left, classText.offset().top, classText.parent().width(), 20);
     progressBar = progressCanvas.rect(0, 0, classText.parent().width(), 20, 5);
     progressBar.attr('fill', '#D33');
     return progressBar.attr('stroke', '#FFF');
