@@ -40,6 +40,7 @@
 
   contrib.on('class-down', function(data) {
     var idx, _results;
+    $(".row").remove();
     _results = [];
     for (idx in data) {
       _results.push(appendClass(idx, data[idx]));

@@ -32,10 +32,12 @@ console.log "Listening on #{port}\nPress CTRL-C to stop server."
 
 cls = ""
 
-fs.readFile "class.json", "utf8", (err,data) ->
-        if err
-                console.log "COULD NOT LOAD CLASS"
-        cls = eval(data)
+readClass = () ->
+        fs.readFile "class.json", "utf8", (err,data) ->
+                if err
+                        console.log "COULD NOT LOAD CLASS"
+                cls = eval(data)
+readClass()
 
 studentsOnline = () ->
     io.of('/student').clients()
@@ -72,6 +74,7 @@ io.of('/contribute')
                 fs.writeFile 'class.json', "("+cls+")", (err) ->
                         console.log err if err
                         console.log 'written' if not err
+                        socket.emit 'class-down', readClass()
 io.of('/teacher')
   .on 'connection', (socket) ->
     socket.emit 'render', onlineData()

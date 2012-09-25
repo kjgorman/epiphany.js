@@ -22,5 +22,6 @@ $(".add").click () ->
         appendClass $(".row").length+1, {base:"your base code here", clsans:"the answer here", clstext:"your description text here"}        
         
 contrib.on 'class-down', (data) ->
+         $(".row").remove()
          for idx of data
              appendClass idx, data[idx]
