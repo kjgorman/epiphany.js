@@ -35,7 +35,7 @@
   setupProgressBar = function() {
     var classText, progressBar, progressCanvas, progressProgressBar, progressProgressIncrement;
     classText = $("#class-text");
-    progressCanvas = Raphael(classText.offset().left, classText.offset().top, classText.parent().width(), 20);
+    progressCanvas = Raphael(classText.offset().left + 10, classText.offset().top, classText.parent().width(), 20);
     progressBar = progressCanvas.rect(0, 0, classText.parent().width(), 20, 5);
     progressBar.attr('fill', '#D33');
     progressBar.attr('stroke', '#FFF');
