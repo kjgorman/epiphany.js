@@ -13,11 +13,13 @@ $("#show-nick").fadeIn(750, () ->
                                     $("#welcome-text").fadeIn(1000))
                                   worldCounter++), 2000)                               
 
-classText =  $("#class-text")
-progressCanvas = Raphael(classText.offset().left.split('px')[0], classText.offset().top.split('px')[0], 800, 20)
-progressBar = progressCanvas.rect(0,0, 400, 20, 5)
-progressBar.attr('fill', '#D33')
-progressBar.attr('stroke', '#FFF')
+
+setupProgressBar = () ->
+        classText =  $("#class-text")
+        progressCanvas = Raphael(classText.offset().left.split('px'), classText.offset().top.split('px'), 800, 20)
+        progressBar = progressCanvas.rect(0,0, 400, 20, 5)
+        progressBar.attr('fill', '#D33')
+        progressBar.attr('stroke', '#FFF')
 
 student.on 'edit', (data) ->
     if data.sid == student.sid
@@ -61,7 +63,9 @@ $("#set-nick-btn").click () ->
         $("#set-nick").hide('blind', () ->                
           $("#set-nick").animate({top:"4%", left:"10%"}, 2000)
           $("#show-nick").animate({top:"2%", left:"10%"}, 2000, () ->        
-            $(".container").fadeIn(1500)
+            $(".container").fadeIn(1500, () ->
+              setupProgressBar()
+            )
           )
         )
         
