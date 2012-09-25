@@ -33,15 +33,16 @@
   });
 
   setupProgressBar = function() {
-    var classText, progressBar, progressCanvas, progressProgress, progressProgressBar, progressProgressIncrement;
+    var classText, progressBar, progressCanvas, progressProgressBar, progressProgressIncrement;
     classText = $("#class-text");
     progressCanvas = Raphael(classText.offset().left, classText.offset().top, classText.parent().width(), 20);
     progressBar = progressCanvas.rect(0, 0, classText.parent().width(), 20, 5);
     progressBar.attr('fill', '#D33');
     progressBar.attr('stroke', '#FFF');
-    progressProgress = 0;
     progressProgressIncrement = classText.parent().width() / 10;
-    progressProgressBar = progressCanvas.rect(0, 0, progressProgress, 20, 5).attr('fill', '#3G3').attr('stroke', '#D33');
+    progressProgressBar = progressCanvas.rect(0, 0, progressProgress, 20, 5);
+    progressProgressBar.attr('fill', '#3G3');
+    progressProgressBar.attr('stroke', '#D33');
     return function() {
       var progress;
       progress = Raphael.animation({

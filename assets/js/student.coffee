@@ -23,11 +23,10 @@ setupProgressBar = () ->
         progressBar = progressCanvas.rect(0,0, classText.parent().width(), 20, 5)
         progressBar.attr('fill', '#D33')
         progressBar.attr('stroke', '#FFF')
-        progressProgress = 0
         progressProgressIncrement = classText.parent().width()/10
         progressProgressBar = progressCanvas.rect(0,0,progressProgress,20,5)
-                                            .attr('fill', '#3G3')
-                                            .attr('stroke', '#D33')
+        progressProgressBar.attr('fill', '#3G3')
+        progressProgressBar .attr('stroke', '#D33')
         
         return () ->
                 progress = Raphael.animation({width:progressProgressBar.attr('width')+progressProgressIncrement}, 2000, "backOut")
