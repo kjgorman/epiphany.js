@@ -41,8 +41,8 @@
     progressBar.attr('stroke', '#FFF');
     progressProgressIncrement = classText.parent().width() / 10;
     progressProgressBar = progressCanvas.rect(0, 0, 0, 20, 5);
-    progressProgressBar.attr('fill', '#3G3');
-    progressProgressBar.attr('stroke', '#D33');
+    progressProgressBar.attr('fill', '#0F0');
+    progressProgressBar.attr('stroke', '#0F0');
     return function() {
       var progress;
       progress = Raphael.animation({
