@@ -69,7 +69,7 @@ io.of('/contribute')
         socket.emit 'class-down', cls
         socket.on 'class-up', (cls) ->
                 console.log cls
-                fs.writeFile 'class.json', "test", (err) ->
+                fs.writeFile 'class.json', "("+cls+")", (err) ->
                         console.log err if err
                         console.log 'written' if not err
 io.of('/teacher')

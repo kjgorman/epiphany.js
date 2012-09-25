@@ -101,7 +101,7 @@ io.of('/contribute').on('connection', function(socket) {
   socket.emit('class-down', cls);
   return socket.on('class-up', function(cls) {
     console.log(cls);
-    return fs.writeFile('class.json', "test", function(err) {
+    return fs.writeFile('class.json', "(" + cls + ")", function(err) {
       if (err) {
         console.log(err);
       }
