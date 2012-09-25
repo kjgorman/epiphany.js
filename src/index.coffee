@@ -20,6 +20,8 @@ app.get '/student', (req,resp) ->
   resp.render 'student'
 app.get '/teacher', (req, resp) ->
   resp.render 'teacher'
+app.get '/contribute', (req,resp) ->
+  resp.render 'contribute'
 # Define Port
 port = process.env.PORT or process.env.VMC_APP_PORT or 3000
 # Start Server
@@ -61,6 +63,10 @@ classData = (clsnum) ->
     cls_data
 
 io.sockets.manager.settings.blacklist = []
+
+io.of('/contribute')
+  .on 'connection', (socket) ->
+        socket.emit 'class-down', cls
 
 io.of('/teacher')
   .on 'connection', (socket) ->

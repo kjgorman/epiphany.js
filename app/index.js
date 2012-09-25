@@ -33,6 +33,10 @@ app.get('/teacher', function(req, resp) {
   return resp.render('teacher');
 });
 
+app.get('/contribute', function(req, resp) {
+  return resp.render('contribute');
+});
+
 port = process.env.PORT || process.env.VMC_APP_PORT || 3000;
 
 srvr = http.createServer(app);
@@ -92,6 +96,10 @@ classData = function(clsnum) {
 };
 
 io.sockets.manager.settings.blacklist = [];
+
+io.of('/contribute').on('connection', function(socket) {
+  return socket.emit('class-down', cls);
+});
 
 io.of('/teacher').on('connection', function(socket) {
   socket.emit('render', onlineData());
