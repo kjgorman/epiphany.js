@@ -12,12 +12,14 @@ $("#show-nick").fadeIn(750, () ->
                                     $("#welcome-text").text(worlds[worldCounter%worlds.length])
                                     $("#welcome-text").fadeIn(1000))
                                   worldCounter++), 2000)                               
-
+$("#set-nick-input").keypress (e) ->
+        if e.keycode == 13
+                getNickInput()
 
 setupProgressBar = () ->
         classText =  $("#class-text")
         progressCanvas = Raphael(classText.offset().left, classText.offset().top, classText.width(), 20)
-        progressBar = progressCanvas.rect(0,0, classText.width(), 20, 5)
+        progressBar = progressCanvas.rect(0,0, classText.parent().width(), 20, 5)
         progressBar.attr('fill', '#D33')
         progressBar.attr('stroke', '#FFF')
 
@@ -56,22 +58,25 @@ student.on 'viewing', (data) ->
 $("#show-nick").click () ->
     $("#set-nick").show('blind');
 
+getNickInput = () ->
+            potenNick = $("#set-nick-input").val()
+            if potenNick != ""
+                
+                $("#set-nick").hide('blind', () ->                
+                  $("#set-nick").animate({top:"4%", left:"10%"}, 2000)
+                  $("#show-nick").animate({top:"2%", left:"10%"}, 2000, () ->        
+                    $(".container").fadeIn(1500, () ->
+                      setupProgressBar()
+                    )
+                  )
+                )
+                
+                student.emit 'set name', potenNick
+                $("#show-nick").text("Hi, #{potenNick}!")
+                clearInterval welcomeRotation
+
 $("#set-nick-btn").click () ->
-    potenNick = $("#set-nick-input").val()
-    if potenNick != ""
-        
-        $("#set-nick").hide('blind', () ->                
-          $("#set-nick").animate({top:"4%", left:"10%"}, 2000)
-          $("#show-nick").animate({top:"2%", left:"10%"}, 2000, () ->        
-            $(".container").fadeIn(1500, () ->
-              setupProgressBar()
-            )
-          )
-        )
-        
-        student.emit 'set name', potenNick
-        $("#show-nick").text("Hi, #{potenNick}!")
-        clearInterval welcomeRotation
+    getNickInput()    
 
 $("#scratch").keydown (e) -> 
     if e.keyCode == 9
