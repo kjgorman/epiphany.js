@@ -98,7 +98,14 @@ classData = function(clsnum) {
 io.sockets.manager.settings.blacklist = [];
 
 io.of('/contribute').on('connection', function(socket) {
-  return socket.emit('class-down', cls);
+  socket.emit('class-down', cls);
+  return socket.on('class-up', function(cls) {
+    return fs.writeFile('class.json', 'utf8', function(err) {
+      if (err) {
+        return console.log(err);
+      }
+    });
+  });
 });
 
 io.of('/teacher').on('connection', function(socket) {

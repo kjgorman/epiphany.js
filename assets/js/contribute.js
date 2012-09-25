@@ -8,7 +8,6 @@
 
   appendClass = function(idx, cls) {
     var ans, base, row, text;
-    console.log(cls);
     row = $("<div id='" + idx + "' class='row'></div>");
     base = $("<div class='span4'><textarea class='span4 base'>" + cls.base + "</textarea></div>");
     ans = $("<div class='span4'><textarea class='span4 ans'>" + cls.clsans + "</textarea></div>");
@@ -28,7 +27,7 @@
       cls[idx].clstext = $(this).find(".text").val();
       return cls[idx].base = $(this).find(".base").val();
     });
-    return console.log(cls);
+    return contrib.emit('class-up', cls);
   });
 
   $(".add").click(function() {
@@ -41,10 +40,8 @@
 
   contrib.on('class-down', function(data) {
     var idx, _results;
-    console.log(data);
     _results = [];
     for (idx in data) {
-      console.log(data[idx]);
       _results.push(appendClass(idx, data[idx]));
     }
     return _results;

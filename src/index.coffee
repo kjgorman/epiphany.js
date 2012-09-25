@@ -67,7 +67,9 @@ io.sockets.manager.settings.blacklist = []
 io.of('/contribute')
   .on 'connection', (socket) ->
         socket.emit 'class-down', cls
-
+        socket.on 'class-up', (cls) ->
+                fs.writeFile 'class.json', 'utf8', (err) ->
+                        console.log err if err
 io.of('/teacher')
   .on 'connection', (socket) ->
     socket.emit 'render', onlineData()
