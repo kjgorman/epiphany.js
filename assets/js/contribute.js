@@ -10,9 +10,9 @@
     var ans, base, row, text;
     console.log(cls);
     row = $("<div id='" + idx + "' class='row'></div>");
-    base = $("<div class='span4 base'><textarea class='span4'>" + cls.base + "</textarea></div>");
-    ans = $("<div class='span4 ans'><textarea class='span4'>" + cls.clsans + "</textarea></div>");
-    text = $("<div class='span4 text'><textarea class='span4'>" + cls.clstext + "</textarea></div>");
+    base = $("<div class='span4'><textarea class='span4 base'>" + cls.base + "</textarea></div>");
+    ans = $("<div class='span4'><textarea class='span4 ans'>" + cls.clsans + "</textarea></div>");
+    text = $("<div class='span4'><textarea class='span4 text'>" + cls.clstext + "</textarea></div>");
     row.append(base).append(ans).append(text);
     return $(".container").append(row);
   };
@@ -24,11 +24,19 @@
       var idx;
       idx = $(this).attr('id');
       cls[idx] = {};
-      cls[idx].clsans = $(this).find(".ans");
-      cls[idx].clstext = $(this).find(".text");
-      return cls[idx].base = $(this).find(".base");
+      cls[idx].clsans = $(this).find(".ans").val();
+      cls[idx].clstext = $(this).find(".text").val();
+      return cls[idx].base = $(this).find(".base").val();
     });
     return console.log(cls);
+  });
+
+  $(".add").click(function() {
+    return appendClass($(".row").length + 1, {
+      base: "your base code here",
+      clsans: "the answer here",
+      clstext: "your description text here"
+    });
   });
 
   contrib.on('class-down', function(data) {
