@@ -18,13 +18,12 @@
   };
 
   contrib.on('class-down', function(data) {
-    var cls, idx, _i, _len, _results;
+    var idx, _results;
     console.log(data);
     _results = [];
-    for (cls = _i = 0, _len = data.length; _i < _len; cls = ++_i) {
-      idx = data[cls];
-      console.log(cls);
-      _results.push(appendClass(idx, cls));
+    for (idx in data) {
+      console.log(data[idx]);
+      _results.push(appendClass(idx, data[idx]));
     }
     return _results;
   });

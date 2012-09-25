@@ -11,6 +11,6 @@ appendClass = (idx, cls) ->
 
 contrib.on 'class-down', (data) ->
          console.log data
-         for idx, cls in data
-                console.log cls
-                appendClass idx, cls
+         for idx of data
+             console.log data[idx]
+             appendClass idx, data[idx]
