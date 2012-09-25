@@ -8,6 +8,7 @@
 
   appendClass = function(idx, cls) {
     var ans, base, row, text;
+    console.log(cls);
     row = $("<div id='" + idx + "' class='row'></div>");
     base = $("<div class='span4'><textarea class='span4'>" + cls.base + "</textarea></div>");
     ans = $("<div class='span4'><textarea class='span4'>" + cls.clsans + "</textarea></div>");
@@ -18,9 +19,11 @@
 
   contrib.on('class-down', function(data) {
     var cls, idx, _i, _len, _results;
+    console.log(data);
     _results = [];
     for (cls = _i = 0, _len = data.length; _i < _len; cls = ++_i) {
       idx = data[cls];
+      console.log(cls);
       _results.push(appendClass(idx, cls));
     }
     return _results;
