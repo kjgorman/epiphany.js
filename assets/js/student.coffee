@@ -6,7 +6,7 @@ worlds = ['world', 'monde', 'mundo', 'mondo', 'welt', 'wereld', 'verden', 'bote'
 worldCounter = 0;
 welcomeRotation = 0
 
-$("#show-nick").fadeIn(1500, () ->
+$("#show-nick").fadeIn(750, () ->
                                 setInterval (() ->
                                   $("#welcome-text").fadeOut(1000, () ->
                                     $("#welcome-text").text(worlds[worldCounter%worlds.length])

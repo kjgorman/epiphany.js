@@ -14,7 +14,7 @@
 
   welcomeRotation = 0;
 
-  $("#show-nick").fadeIn(1500, function() {
+  $("#show-nick").fadeIn(750, function() {
     return setInterval((function() {
       $("#welcome-text").fadeOut(1000, function() {
         $("#welcome-text").text(worlds[worldCounter % worlds.length]);
