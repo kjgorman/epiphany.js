@@ -14,7 +14,7 @@ $("#show-nick").fadeIn(750, () ->
                                   worldCounter++), 2000)                               
 
 classText =  $("#class-text")
-progressCanvas = Raphael(classText.offset().left, classText.offset().top, 800, 20)
+progressCanvas = Raphael(classText.offset().left.split('px')[0], classText.offset().top.split('px')[0], 800, 20)
 progressBar = progressCanvas.rect(0,0, 400, 20, 5)
 progressBar.attr('fill', '#D33')
 progressBar.attr('stroke', '#FFF')
