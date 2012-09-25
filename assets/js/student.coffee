@@ -24,7 +24,7 @@ setupProgressBar = () ->
         progressBar.attr('fill', '#D33')
         progressBar.attr('stroke', '#FFF')
         progressProgressIncrement = classText.parent().width()/10
-        progressProgressBar = progressCanvas.rect(0,0,progressProgress,20,5)
+        progressProgressBar = progressCanvas.rect(0,0,0,20,5)
         progressProgressBar.attr('fill', '#3G3')
         progressProgressBar .attr('stroke', '#D33')
         
