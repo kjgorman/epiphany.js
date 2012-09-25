@@ -118,9 +118,7 @@
           left: "10%"
         }, 2000, function() {
           return $(".container").fadeIn(1500, function() {
-            if (!$("rect")) {
-              return incrProgress = setupProgressBar();
-            }
+            return incrProgress = setupProgressBar();
           });
         });
       });

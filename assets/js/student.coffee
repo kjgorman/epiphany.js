@@ -74,8 +74,7 @@ getNickInput = () ->
                   $("#set-nick").animate({top:"4%", left:"10%"}, 2000)
                   $("#show-nick").animate({top:"2%", left:"10%"}, 2000, () ->        
                     $(".container").fadeIn(1500, () ->
-                      if !$("rect")
-                          incrProgress = setupProgressBar()
+                      incrProgress = setupProgressBar()
                     )
                   )
                 )
