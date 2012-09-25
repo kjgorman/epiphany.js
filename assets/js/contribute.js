@@ -10,12 +10,26 @@
     var ans, base, row, text;
     console.log(cls);
     row = $("<div id='" + idx + "' class='row'></div>");
-    base = $("<div class='span4'><textarea class='span4'>" + cls.base + "</textarea></div>");
-    ans = $("<div class='span4'><textarea class='span4'>" + cls.clsans + "</textarea></div>");
-    text = $("<div class='span4'><textarea class='span4'>" + cls.clstext + "</textarea></div>");
+    base = $("<div class='span4 base'><textarea class='span4'>" + cls.base + "</textarea></div>");
+    ans = $("<div class='span4 ans'><textarea class='span4'>" + cls.clsans + "</textarea></div>");
+    text = $("<div class='span4 text'><textarea class='span4'>" + cls.clstext + "</textarea></div>");
     row.append(base).append(ans).append(text);
     return $(".container").append(row);
   };
+
+  $(".save").click(function() {
+    var cls;
+    cls = {};
+    $('.row').each(function() {
+      var idx;
+      idx = $(this).attr('id');
+      cls[idx] = {};
+      cls[idx].clsans = $(this).find(".ans");
+      cls[idx].clstext = $(this).find(".text");
+      return cls[idx].base = $(this).find(".base");
+    });
+    return console.log(cls);
+  });
 
   contrib.on('class-down', function(data) {
     var idx, _results;
