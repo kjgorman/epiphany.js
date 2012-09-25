@@ -27,8 +27,8 @@
   setupProgressBar = function() {
     var classText, progressBar, progressCanvas;
     classText = $("#class-text");
-    progressCanvas = Raphael(classText.offset().left, classText.offset().top, 800, 20);
-    progressBar = progressCanvas.rect(0, 0, 400, 20, 5);
+    progressCanvas = Raphael(classText.offset().left, classText.offset().top, classText.width(), 20);
+    progressBar = progressCanvas.rect(0, 0, classText.width(), 20, 5);
     progressBar.attr('fill', '#D33');
     return progressBar.attr('stroke', '#FFF');
   };
