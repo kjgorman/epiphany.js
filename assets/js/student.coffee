@@ -5,6 +5,7 @@ current_answer = -1
 worlds = ['world', 'monde', 'mundo', 'mondo', 'welt', 'wereld', 'verden', 'bote', 'mon', 'swiat', 'svet', 'byd']
 worldCounter = 0;
 welcomeRotation = 0
+incrProgress = {}
 
 $("#show-nick").fadeIn(750, () ->
                                 setInterval (() ->
@@ -22,6 +23,13 @@ setupProgressBar = () ->
         progressBar = progressCanvas.rect(0,0, classText.parent().width(), 20, 5)
         progressBar.attr('fill', '#D33')
         progressBar.attr('stroke', '#FFF')
+        progressProgress = 0
+        progressProgressIncrement = classText.parent().width()/10
+        progressProgressBar = progressCanvas.rect(0,0,progressProgress,20,5);
+        progressProgressBar.attr('fill', '#3G3')
+        progressProgressBar.attr('stroke', '#D33')
+        
+        return () -> progressProgressBar.animate(Raphael.animation({width:progressProgressBar.attr('width')+progressProgressIncrement}, 2000, "backOut"))
 
 student.on 'edit', (data) ->
     if data.sid == student.sid
@@ -66,7 +74,8 @@ getNickInput = () ->
                   $("#set-nick").animate({top:"4%", left:"10%"}, 2000)
                   $("#show-nick").animate({top:"2%", left:"10%"}, 2000, () ->        
                     $(".container").fadeIn(1500, () ->
-                      setupProgressBar()
+                      if !$("rect")
+                          incrProgress = setupProgressBar()
                     )
                   )
                 )
@@ -115,7 +124,7 @@ output = (txt) ->
                            <div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button></div>
                            <div class='modal-body'><h1>Well done, that's correct!</h1></div>
                            <div class='modal-footer centered'><a href='#' class='btn btn-large btn-success' data-dismiss='modal'>Next Lesson</a></div>
-                          </div>").modal()
+                          </div>").modal().on('hidden', () -> incrProgress())
         student.emit 'level up'
     $cnsl = $("#console")        
     $cnsl.val $cnsl.val()+txt+"\n>> " 
