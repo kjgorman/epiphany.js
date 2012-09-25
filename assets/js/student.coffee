@@ -5,6 +5,7 @@ current_answer = -1
 worlds = ['world', 'monde', 'mundo', 'mondo', 'welt', 'wereld', 'verden', 'bote', 'mon', 'swiat', 'svet', 'byd']
 worldCounter = 0;
 welcomeRotation = 0
+incrProgress = {}
 
 $("#show-nick").fadeIn(750, () ->
                                 setInterval (() ->
@@ -12,8 +13,25 @@ $("#show-nick").fadeIn(750, () ->
                                     $("#welcome-text").text(worlds[worldCounter%worlds.length])
                                     $("#welcome-text").fadeIn(1000))
                                   worldCounter++), 2000)                               
+$("#set-nick-input").keypress (e) ->
+        if e.keyCode == 13
+                getNickInput()
 
-                     
+setupProgressBar = () ->
+        classText =  $("#class-text")
+        progressCanvas = Raphael(classText.offset().left, classText.offset().top, classText.parent().width(), 20)
+        progressBar = progressCanvas.rect(0,0, classText.parent().width(), 20, 5)
+        progressBar.attr('fill', '#D33')
+        progressBar.attr('stroke', '#FFF')
+        progressProgressIncrement = classText.parent().width()/10
+        progressProgressBar = progressCanvas.rect(0,0,0,20,5)
+        progressProgressBar.attr('fill', '#3F3')
+        progressProgressBar .attr('stroke', '#3F3')
+        
+        return () ->
+                progress = Raphael.animation({width:progressProgressBar.attr('width')+progressProgressIncrement}, 2000, "backOut")
+                progressProgressBar.animate(progress)
+                progressProgressBar.attr('width', progressProgressBar.attr('width')+progressProgressIncrement)
 
 student.on 'edit', (data) ->
     if data.sid == student.sid
@@ -23,10 +41,8 @@ student.on 'online', (data) ->
 
 student.on 'sid', (sid) ->
     student.sid = sid
-    console.log student.sid
 
 student.on 'class', (data) ->
-    console.log data
     $("#class-num").text(data.clsnum)
     $("#class-text").text(data.clstext)
     $("#scratch").val(data.base)
@@ -50,20 +66,25 @@ student.on 'viewing', (data) ->
 $("#show-nick").click () ->
     $("#set-nick").show('blind');
 
+getNickInput = () ->
+            potenNick = $("#set-nick-input").val()
+            if potenNick != ""
+                
+                $("#set-nick").hide('blind', () ->                
+                  $("#set-nick").animate({top:"4%", left:"10%"}, 2000)
+                  $("#show-nick").animate({top:"2%", left:"10%"}, 2000, () ->        
+                    $(".container").fadeIn(1500, () ->
+                      incrProgress = setupProgressBar()
+                    )
+                  )
+                )
+                
+                student.emit 'set name', potenNick
+                $("#show-nick").text("Hi, #{potenNick}!")
+                clearInterval welcomeRotation
+
 $("#set-nick-btn").click () ->
-    potenNick = $("#set-nick-input").val()
-    if potenNick != ""
-        
-        $("#set-nick").hide('blind', () ->                
-          $("#set-nick").animate({top:"4%", left:"10%"}, 2000)
-          $("#show-nick").animate({top:"2%", left:"10%"}, 2000, () ->        
-            $(".container").fadeIn(1500)
-          )
-        )
-        
-        student.emit 'set name', potenNick
-        $("#show-nick").text("Hi, #{potenNick}!")
-        clearInterval welcomeRotation
+    getNickInput()    
 
 $("#scratch").keydown (e) -> 
     if e.keyCode == 9
@@ -89,7 +110,6 @@ $('#scratch').keyup ->
       if hasDollar
           dollarCharacterConsideredHarmful()
           return
-      console.log "emitting an edit"
       student.emit 'edit', {text:$(this).val()}
     else
       if !hasDollar
@@ -102,7 +122,10 @@ output = (txt) ->
                            <div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button></div>
                            <div class='modal-body'><h1>Well done, that's correct!</h1></div>
                            <div class='modal-footer centered'><a href='#' class='btn btn-large btn-success' data-dismiss='modal'>Next Lesson</a></div>
-                          </div>").modal()
+                          </div>").modal().on('hidden', () ->
+                                  console.log incrProgress
+                                  incrProgress()
+                                )
         student.emit 'level up'
     $cnsl = $("#console")        
     $cnsl.val $cnsl.val()+txt+"\n>> " 

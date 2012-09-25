@@ -20,6 +20,8 @@ app.get '/student', (req,resp) ->
   resp.render 'student'
 app.get '/teacher', (req, resp) ->
   resp.render 'teacher'
+app.get '/contribute', (req,resp) ->
+  resp.render 'contribute'
 # Define Port
 port = process.env.PORT or process.env.VMC_APP_PORT or 3000
 # Start Server
@@ -62,6 +64,14 @@ classData = (clsnum) ->
 
 io.sockets.manager.settings.blacklist = []
 
+io.of('/contribute')
+  .on 'connection', (socket) ->
+        socket.emit 'class-down', cls
+        socket.on 'class-up', (cls) ->
+                console.log cls
+                fs.writeFile 'class.json', "test", (err) ->
+                        console.log err if err
+                        console.log 'written' if not err
 io.of('/teacher')
   .on 'connection', (socket) ->
     socket.emit 'render', onlineData()
