@@ -34,12 +34,9 @@ cls = ""
 
 readClass = () ->
         data = fs.readFileSync "class.json", "utf8"                
-        console.log "data: "
-        console.log data
         try
           cls = eval(data)
         catch err
-          console.log err.message
           cls = data
         cls
                 
@@ -76,9 +73,7 @@ io.of('/contribute')
   .on 'connection', (socket) ->
         socket.emit 'class-down', cls
         socket.on 'class-up', (cls) ->
-                clsAsText = JSON.stringify(cls)
-                console.log 'cls'
-                console.log clsAsText
+                clsAsText = JSON.stringify(cls)                
                 fs.writeFile 'class.json', "("+clsAsText+")", (err) ->
                         console.log err if err
                         data = readClass()

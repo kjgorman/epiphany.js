@@ -52,12 +52,9 @@ cls = "";
 readClass = function() {
   var data;
   data = fs.readFileSync("class.json", "utf8");
-  console.log("data: ");
-  console.log(data);
   try {
     cls = eval(data);
   } catch (err) {
-    console.log(err.message);
     cls = data;
   }
   return cls;
@@ -111,8 +108,6 @@ io.of('/contribute').on('connection', function(socket) {
   return socket.on('class-up', function(cls) {
     var clsAsText;
     clsAsText = JSON.stringify(cls);
-    console.log('cls');
-    console.log(clsAsText);
     return fs.writeFile('class.json', "(" + clsAsText + ")", function(err) {
       var data;
       if (err) {

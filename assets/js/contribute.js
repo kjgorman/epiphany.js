@@ -9,9 +9,9 @@
   appendClass = function(idx, cls) {
     var ans, base, row, text;
     row = $("<div id='" + idx + "' class='row'></div>");
-    base = $("<div class='span4'><textarea class='span4 base'>" + cls.base + "</textarea></div>");
-    ans = $("<div class='span4'><textarea class='span4 ans'>" + cls.clsans + "</textarea></div>");
-    text = $("<div class='span4'><textarea class='span4 text'>" + cls.clstext + "</textarea></div>");
+    base = $("<div class='span4 odd'><textarea class='span4 base'>" + cls.base + "</textarea></div>");
+    ans = $("<div class='span4 even'><textarea class='span4 ans'>" + cls.clsans + "</textarea></div>");
+    text = $("<div class='span4 odd'><textarea class='span4 text'>" + cls.clstext + "</textarea></div>");
     row.append(base).append(ans).append(text);
     return $(".container").append(row);
   };
