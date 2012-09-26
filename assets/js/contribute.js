@@ -12,9 +12,9 @@
     var ans, base, mvicon, row, text;
     row = $("<div id='" + idx + "' class='row' style='background-color:#fafafa'></div>");
     base = $("<div class='span4 odd'><textarea class='span4 base'>" + cls.base + "</textarea></div>");
-    ans = $("<div class='span4 even'><textarea class='span4 ans'>" + cls.clsans + "</textarea></div>");
+    ans = $("<div class='span4 even'><textarea class='span3 ans'>" + cls.clsans + "</textarea></div>");
     text = $("<div class='span4 odd'><textarea class='span4 text'>" + cls.clstext + "</textarea></div>");
-    mvicon = $("<i class='icon-move'></i>");
+    mvicon = $("<div class='span1'><i class='icon-move'></i></div>");
     row.append(base).append(ans).append(text);
     row.prepend(mvicon);
     return $(".class-container").append(row);
