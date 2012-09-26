@@ -3,7 +3,7 @@ contrib = io.connect '/contribute', {'sync disconnect on unload' : true}
 $(".sortable").sortable()
 
 appendClass = (idx, cls) ->
-        row = $("<div id='#{idx}' class='row'></div>")
+        row = $("<div id='#{idx}' class='row'><i class='icon-move'></i></div>")
         base = $("<div class='span4 odd'><textarea class='span4 base'>"+cls.base+"</textarea></div>")
         ans = $("<div class='span4 even'><textarea class='span4 ans'>"+cls.clsans+"</textarea></div>")
         text = $("<div class='span4 odd'><textarea class='span4 text'>"+cls.clstext+"</textarea></div>")
