@@ -44,7 +44,7 @@ readClass = () ->
                                 console.log k
                                 console.log data[k]
                         console.log err.message
-                        cls = data                        
+                        return cls = data                        
 readClass()
 
 studentsOnline = () ->
@@ -78,11 +78,10 @@ io.of('/contribute')
   .on 'connection', (socket) ->
         socket.emit 'class-down', cls
         socket.on 'class-up', (cls) ->
-                console.log 'cls'
-                console.log cls
-                fs.writeFile 'class.json', "("+cls+")", (err) ->
+                fs.writeFile 'class.json', cls, (err) ->
                         console.log err if err
                         data = readClass()
+                        console.log 'read'
                         console.log data
                         socket.emit 'class-down', data
 io.of('/teacher')
