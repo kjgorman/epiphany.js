@@ -109,9 +109,11 @@ io.sockets.manager.settings.blacklist = [];
 io.of('/contribute').on('connection', function(socket) {
   socket.emit('class-down', cls);
   return socket.on('class-up', function(cls) {
+    var clsAsText;
+    clsAsText = JSON.stringify(cls);
     console.log('cls');
-    console.log("(" + cls + ")");
-    return fs.writeFile('class.json', "(" + cls + ")", function(err) {
+    console.log(clsAsText);
+    return fs.writeFile('class.json', "(" + clsAsText + ")", function(err) {
       var data;
       if (err) {
         console.log(err);
