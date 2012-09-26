@@ -16,6 +16,7 @@ $(".save").click () ->
           cls[idx].clsans = $(this).find(".ans").val()
           cls[idx].clstext = $(this).find(".text").val()
           cls[idx].base = $(this).find(".base").val()
+        console.log cls
         contrib.emit 'class-up', cls
 
 $(".add").click () ->

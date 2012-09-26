@@ -27,6 +27,7 @@
       cls[idx].clstext = $(this).find(".text").val();
       return cls[idx].base = $(this).find(".base").val();
     });
+    console.log(cls);
     return contrib.emit('class-up', cls);
   });
 
