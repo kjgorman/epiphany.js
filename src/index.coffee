@@ -42,6 +42,7 @@ readClass = () ->
                 catch err
                         for k of data
                                 console.log k
+                                console.log data[k]
                         console.log err.message
                         cls = data                        
 readClass()

@@ -61,6 +61,7 @@ readClass = function() {
     } catch (err) {
       for (k in data) {
         console.log(k);
+        console.log(data[k]);
       }
       console.log(err.message);
       return cls = data;
