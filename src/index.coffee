@@ -91,7 +91,7 @@ io.of('/teacher')
 io.of('/student')
   .on 'connection', (socket) ->
     online_data = onlineData() #don't need to recompute this for the next few emissions
-    current_cls = 1
+    current_cls = 0
     completion = 0
     
     socket.emit 'online', online_data

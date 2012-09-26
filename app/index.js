@@ -132,7 +132,7 @@ io.of('/teacher').on('connection', function(socket) {
 io.of('/student').on('connection', function(socket) {
   var completion, current_cls, online_data;
   online_data = onlineData();
-  current_cls = 1;
+  current_cls = 0;
   completion = 0;
   socket.emit('online', online_data);
   socket.emit('class', classData(current_cls));
