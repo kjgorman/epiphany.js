@@ -16,7 +16,7 @@
     text = $("<div class='span4 odd'><textarea class='span4 text'>" + cls.clstext + "</textarea></div>");
     mvicon = $("<i class='icon-move'></i>");
     row.append(base).append(ans).append(text);
-    row.preprend(mvicon);
+    row.prepend(mvicon);
     return $(".class-container").append(row);
   };
 
