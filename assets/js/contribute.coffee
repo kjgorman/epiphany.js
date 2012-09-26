@@ -7,7 +7,7 @@ appendClass = (idx, cls) ->
         base = $("<div class='span4 odd'><textarea class='span4 base'>"+cls.base+"</textarea></div>")
         ans = $("<div class='span3 even'><textarea class='span3 ans'>"+cls.clsans+"</textarea></div>")
         text = $("<div class='span4 odd'><textarea class='span4 text'>"+cls.clstext+"</textarea></div>")
-        mvicon = $("<div class='span1'><i class='icon-move'></i></div>");
+        mvicon = $("<div class='span1' style='cursor:pointer'><i class='icon-move'></i></div>");
         row.append(base).append(ans).append(text)
         row.prepend(mvicon)
         $(".class-container").append(row)
