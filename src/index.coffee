@@ -71,6 +71,12 @@ io.of('/contribute')
   .on 'connection', (socket) ->
         socket.emit 'class-down', cls
         socket.on 'class-up', (cls) ->
+                console.log cls
+                try
+                        eval "("+cls+")"
+                catch err
+                        console.log "can't eval class data"
+                        console.log err.message
                 fs.writeFile 'class.json', "("+cls+")", (err) ->
                         console.log err if err
                         socket.emit 'class-down', readClass()

@@ -105,6 +105,13 @@ io.sockets.manager.settings.blacklist = [];
 io.of('/contribute').on('connection', function(socket) {
   socket.emit('class-down', cls);
   return socket.on('class-up', function(cls) {
+    console.log(cls);
+    try {
+      eval("(" + cls + ")");
+    } catch (err) {
+      console.log("can't eval class data");
+      console.log(err.message);
+    }
     return fs.writeFile('class.json', "(" + cls + ")", function(err) {
       if (err) {
         console.log(err);
