@@ -81,7 +81,7 @@ io.of('/contribute')
                 fs.writeFile 'class.json', "("+cls+")", (err) ->
                         console.log err if err
                         data = readClass()
-                        console log data
+                        console.log data
                         socket.emit 'class-down', data
 io.of('/teacher')
   .on 'connection', (socket) ->

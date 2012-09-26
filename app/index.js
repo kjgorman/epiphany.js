@@ -121,7 +121,7 @@ io.of('/contribute').on('connection', function(socket) {
         console.log(err);
       }
       data = readClass();
-      console(log(data));
+      console.log(data);
       return socket.emit('class-down', data);
     });
   });
