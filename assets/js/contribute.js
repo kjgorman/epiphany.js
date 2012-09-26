@@ -41,6 +41,7 @@
 
   contrib.on('class-down', function(data) {
     var idx, _results;
+    console.log(data);
     $(".row").remove();
     _results = [];
     for (idx in data) {
