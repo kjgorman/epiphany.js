@@ -36,6 +36,7 @@ readClass = () ->
         fs.readFile "class.json", "utf8", (err,data) ->
                 if err
                         console.log "COULD NOT LOAD CLASS"
+                console.log cls
                 cls = eval(data)
 readClass()
 

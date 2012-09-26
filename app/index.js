@@ -54,6 +54,7 @@ readClass = function() {
     if (err) {
       console.log("COULD NOT LOAD CLASS");
     }
+    console.log(cls);
     return cls = eval(data);
   });
 };
