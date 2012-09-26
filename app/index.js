@@ -49,25 +49,21 @@ console.log("Listening on " + port + "\nPress CTRL-C to stop server.");
 
 cls = "";
 
-readClass = function(socket) {
-  return fs.readFile("class.json", "utf8", function(err, data) {
-    var k;
-    if (err) {
-      console.log("COULD NOT LOAD CLASS");
+readClass = function() {
+  var data, k;
+  data = fs.readFileSync("class.json", "utf8");
+  console.log("data: " + data);
+  try {
+    cls = eval(data);
+  } catch (err) {
+    for (k in data) {
+      console.log(k);
+      console.log(data[k]);
     }
-    console.log("data: " + data);
-    try {
-      cls = eval(data);
-    } catch (err) {
-      for (k in data) {
-        console.log(k);
-        console.log(data[k]);
-      }
-      console.log(err.message);
-      cls = data;
-    }
-    return socket.emit('class-down', cls);
-  });
+    console.log(err.message);
+    cls = data;
+  }
+  return cls;
 };
 
 readClass();
@@ -121,7 +117,8 @@ io.of('/contribute').on('connection', function(socket) {
       if (err) {
         console.log(err);
       }
-      return data = readClass(socket);
+      data = readClass();
+      return socket.emit('class-down', data);
     });
   });
 });
