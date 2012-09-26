@@ -39,9 +39,6 @@ readClass = () ->
         try
           cls = eval(data)
         catch err
-          for k of data
-            console.log k
-            console.log data[k]
           console.log err.message
           cls = data
         cls
@@ -79,7 +76,9 @@ io.of('/contribute')
   .on 'connection', (socket) ->
         socket.emit 'class-down', cls
         socket.on 'class-up', (cls) ->
-                fs.writeFile 'class.json', cls, (err) ->
+                console.log 'cls'
+                console.log cls
+                fs.writeFile 'class.json', "("+cls+")", (err) ->
                         console.log err if err
                         data = readClass()
                         socket.emit 'class-down', data

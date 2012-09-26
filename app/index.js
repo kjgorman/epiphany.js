@@ -50,16 +50,12 @@ console.log("Listening on " + port + "\nPress CTRL-C to stop server.");
 cls = "";
 
 readClass = function() {
-  var data, k;
+  var data;
   data = fs.readFileSync("class.json", "utf8");
   console.log("data: " + data);
   try {
     cls = eval(data);
   } catch (err) {
-    for (k in data) {
-      console.log(k);
-      console.log(data[k]);
-    }
     console.log(err.message);
     cls = data;
   }
@@ -112,7 +108,9 @@ io.sockets.manager.settings.blacklist = [];
 io.of('/contribute').on('connection', function(socket) {
   socket.emit('class-down', cls);
   return socket.on('class-up', function(cls) {
-    return fs.writeFile('class.json', cls, function(err) {
+    console.log('cls');
+    console.log(cls);
+    return fs.writeFile('class.json', "(" + cls + ")", function(err) {
       var data;
       if (err) {
         console.log(err);
