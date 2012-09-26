@@ -56,9 +56,10 @@ readClass = function() {
     }
     console.log(data);
     try {
-      return cls = eval(data);
+      return cls = data;
     } catch (err) {
-      return console.log(err.message);
+      console.log(err.message);
+      return cls;
     }
   });
 };
