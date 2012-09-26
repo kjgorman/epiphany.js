@@ -173,7 +173,7 @@
 
   output = function(txt) {
     var $cnsl, levelUpModal;
-    if (typeof text === 'number') {
+    if (typeof txt !== 'string') {
       txt = txt.toString();
     }
     if (txt === current_answer) {
