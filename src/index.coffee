@@ -33,9 +33,9 @@ console.log "Listening on #{port}\nPress CTRL-C to stop server."
 cls = ""
 
 readClass = () ->
-        data = fs.readFileSync "class.json", "utf8"
-                
-        console.log "data: "+data    
+        data = fs.readFileSync "class.json", "utf8"                
+        console.log "data: "
+        console.log data
         try
           cls = eval(data)
         catch err

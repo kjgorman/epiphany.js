@@ -52,7 +52,8 @@ cls = "";
 readClass = function() {
   var data;
   data = fs.readFileSync("class.json", "utf8");
-  console.log("data: " + data);
+  console.log("data: ");
+  console.log(data);
   try {
     cls = eval(data);
   } catch (err) {
