@@ -33,7 +33,7 @@ console.log "Listening on #{port}\nPress CTRL-C to stop server."
 cls = ""
 
 readClass = (callback) ->
-        fs.readFile "class.json", "utf8", (err,data) ->
+        fs.readFile "class.json", "utf8", (err,data, callback) ->
                 if err
                         console.log "COULD NOT LOAD CLASS"
                 console.log "data: "+data    

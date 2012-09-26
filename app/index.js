@@ -50,7 +50,7 @@ console.log("Listening on " + port + "\nPress CTRL-C to stop server.");
 cls = "";
 
 readClass = function(callback) {
-  return fs.readFile("class.json", "utf8", function(err, data) {
+  return fs.readFile("class.json", "utf8", function(err, data, callback) {
     var k;
     if (err) {
       console.log("COULD NOT LOAD CLASS");
