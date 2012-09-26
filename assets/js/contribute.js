@@ -23,9 +23,9 @@
       var idx;
       idx = $(this).attr('id');
       cls[idx] = {};
-      cls[idx].clsans = $(this).find(".ans").val();
-      cls[idx].clstext = $(this).find(".text").val();
-      return cls[idx].base = $(this).find(".base").val();
+      cls[idx].clsans = "\"" + $(this).find(".ans").val() + "\"";
+      cls[idx].clstext = "\"" + $(this).find(".text").val() + "\"";
+      return cls[idx].base = "\"" + $(this).find(".base").val() + "\"";
     });
     console.log(cls);
     return contrib.emit('class-up', cls);
