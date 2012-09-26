@@ -36,7 +36,7 @@ readClass = () ->
         fs.readFile "class.json", "utf8", (err,data) ->
                 if err
                         console.log "COULD NOT LOAD CLASS"
-                console.log cls
+                console.log data
                 cls = eval(data)
 readClass()
 
@@ -71,10 +71,8 @@ io.of('/contribute')
   .on 'connection', (socket) ->
         socket.emit 'class-down', cls
         socket.on 'class-up', (cls) ->
-                console.log cls
                 fs.writeFile 'class.json', "("+cls+")", (err) ->
                         console.log err if err
-                        console.log 'written' if not err
                         socket.emit 'class-down', readClass()
 io.of('/teacher')
   .on 'connection', (socket) ->

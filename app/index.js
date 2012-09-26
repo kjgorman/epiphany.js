@@ -54,7 +54,7 @@ readClass = function() {
     if (err) {
       console.log("COULD NOT LOAD CLASS");
     }
-    console.log(cls);
+    console.log(data);
     return cls = eval(data);
   });
 };
@@ -105,13 +105,9 @@ io.sockets.manager.settings.blacklist = [];
 io.of('/contribute').on('connection', function(socket) {
   socket.emit('class-down', cls);
   return socket.on('class-up', function(cls) {
-    console.log(cls);
     return fs.writeFile('class.json', "(" + cls + ")", function(err) {
       if (err) {
         console.log(err);
-      }
-      if (!err) {
-        console.log('written');
       }
       return socket.emit('class-down', readClass());
     });
