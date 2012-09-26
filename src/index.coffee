@@ -36,12 +36,12 @@ readClass = () ->
         fs.readFile "class.json", "utf8", (err,data) ->
                 if err
                         console.log "COULD NOT LOAD CLASS"
-                console.log data
+                console.log "data: "+data    
                 try
                         cls = eval(data)
                 catch err
                         console.log err.message
-                        cls = data
+                        cls = data                        
 readClass()
 
 studentsOnline = () ->
