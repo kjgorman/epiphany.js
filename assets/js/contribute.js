@@ -6,6 +6,8 @@
     'sync disconnect on unload': true
   });
 
+  $(".sortable").sortable();
+
   appendClass = function(idx, cls) {
     var ans, base, row, text;
     row = $("<div id='" + idx + "' class='row'></div>");
@@ -13,15 +15,15 @@
     ans = $("<div class='span4 even'><textarea class='span4 ans'>" + cls.clsans + "</textarea></div>");
     text = $("<div class='span4 odd'><textarea class='span4 text'>" + cls.clstext + "</textarea></div>");
     row.append(base).append(ans).append(text);
-    return $(".container").append(row);
+    return $(".class-container").append(row);
   };
 
   $(".save").click(function() {
     var cls;
     cls = {};
-    $('.row').each(function() {
+    $('.row').each(function(index, value) {
       var idx;
-      idx = $(this).attr('id');
+      idx = index;
       cls[idx] = {};
       cls[idx].clsans = $(this).find(".ans").val();
       cls[idx].clstext = $(this).find(".text").val();

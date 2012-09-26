@@ -1,17 +1,19 @@
 contrib = io.connect '/contribute', {'sync disconnect on unload' : true}
 
+$(".sortable").sortable()
+
 appendClass = (idx, cls) ->
         row = $("<div id='#{idx}' class='row'></div>")
         base = $("<div class='span4 odd'><textarea class='span4 base'>"+cls.base+"</textarea></div>")
         ans = $("<div class='span4 even'><textarea class='span4 ans'>"+cls.clsans+"</textarea></div>")
         text = $("<div class='span4 odd'><textarea class='span4 text'>"+cls.clstext+"</textarea></div>")
         row.append(base).append(ans).append(text)
-        $(".container").append(row)
+        $(".class-container").append(row)
 
 $(".save").click () ->
         cls = {}
-        $('.row').each () ->
-          idx = $(this).attr('id')
+        $('.row').each (index, value) ->
+          idx = index
           cls[idx] = {}        
           cls[idx].clsans = $(this).find(".ans").val()
           cls[idx].clstext = $(this).find(".text").val()
