@@ -173,6 +173,9 @@
 
   output = function(txt) {
     var $cnsl, levelUpModal;
+    if (typeof text === 'number') {
+      txt = txt.toString();
+    }
     if (txt === current_answer) {
       levelUpModal = $("<div class='modal hide fade'>                           <div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button></div>                           <div class='modal-body'><h1>Well done, that's correct!</h1></div>                           <div class='modal-footer centered'><a href='#' class='btn btn-large btn-success' data-dismiss='modal'>Next Lesson</a></div>                          </div>").modal().on('hidden', function() {
         console.log(incrProgress);

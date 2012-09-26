@@ -117,6 +117,8 @@ $('#scratch').keyup ->
       
 
 output = (txt) ->
+    if typeof text == 'number'
+        txt = txt.toString();
     if txt == current_answer
         levelUpModal = $("<div class='modal hide fade'>
                            <div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button></div>
