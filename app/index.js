@@ -51,6 +51,7 @@ cls = "";
 
 readClass = function() {
   return fs.readFile("class.json", "utf8", function(err, data) {
+    var k;
     if (err) {
       console.log("COULD NOT LOAD CLASS");
     }
@@ -58,6 +59,9 @@ readClass = function() {
     try {
       return cls = eval(data);
     } catch (err) {
+      for (k in data) {
+        console.log(k);
+      }
       console.log(err.message);
       return cls = data;
     }

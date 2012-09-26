@@ -40,6 +40,8 @@ readClass = () ->
                 try
                         cls = eval(data)
                 catch err
+                        for k of data
+                                console.log k
                         console.log err.message
                         cls = data                        
 readClass()
