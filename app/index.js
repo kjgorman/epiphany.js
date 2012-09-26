@@ -49,7 +49,7 @@ console.log("Listening on " + port + "\nPress CTRL-C to stop server.");
 
 cls = "";
 
-readClass = function() {
+readClass = function(callback) {
   return fs.readFile("class.json", "utf8", function(err, data) {
     var k;
     if (err) {
@@ -57,15 +57,16 @@ readClass = function() {
     }
     console.log("data: " + data);
     try {
-      return cls = eval(data);
+      cls = eval(data);
     } catch (err) {
       for (k in data) {
         console.log(k);
         console.log(data[k]);
       }
       console.log(err.message);
-      return cls = data;
+      cls = data;
     }
+    return callback();
   });
 };
 
@@ -120,10 +121,9 @@ io.of('/contribute').on('connection', function(socket) {
       if (err) {
         console.log(err);
       }
-      data = readClass();
-      console.log('read');
-      console.log(data);
-      return socket.emit('class-down', data);
+      return data = readClass(function() {
+        return socket.emit('class-down', data);
+      });
     });
   });
 });
