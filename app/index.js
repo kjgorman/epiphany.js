@@ -116,10 +116,13 @@ io.of('/contribute').on('connection', function(socket) {
   socket.emit('class-down', cls);
   return socket.on('class-up', function(cls) {
     return fs.writeFile('class.json', "(" + cls + ")", function(err) {
+      var data;
       if (err) {
         console.log(err);
       }
-      return socket.emit('class-down', readClass());
+      data = readClass();
+      console(log(data));
+      return socket.emit('class-down', data);
     });
   });
 });
