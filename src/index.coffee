@@ -38,10 +38,10 @@ readClass = () ->
                         console.log "COULD NOT LOAD CLASS"
                 console.log data
                 try
-                        cls = data
+                        cls = eval(data)
                 catch err
                         console.log err.message
-                        cls
+                        cls = data
 readClass()
 
 studentsOnline = () ->

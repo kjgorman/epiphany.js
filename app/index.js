@@ -56,10 +56,10 @@ readClass = function() {
     }
     console.log(data);
     try {
-      return cls = data;
+      return cls = eval(data);
     } catch (err) {
       console.log(err.message);
-      return cls;
+      return cls = data;
     }
   });
 };
